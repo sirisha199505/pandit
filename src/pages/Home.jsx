@@ -145,8 +145,13 @@ export default function Home() {
       </section>
 
       {/* ════════ CATEGORIES ════════ */}
-      <section className="bg-cream py-14 pattern-rangoli">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative py-14">
+        <div className="absolute inset-0 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=1600&q=80" alt="" className="w-full h-full object-cover object-center" />
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(255,237,213,0.92) 0%, rgba(254,243,199,0.88) 100%)' }} />
+          <div className="absolute inset-0 pattern-rangoli" />
+        </div>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             label="Browse by Ceremony"
             title="Find the Right Ritual"
@@ -189,8 +194,13 @@ export default function Home() {
       </section>
 
       {/* ════════ HOW IT WORKS ════════ */}
-      <section className="bg-cream py-14 pattern-mandala">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative py-14">
+        <div className="absolute inset-0 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1604999333679-b86d54738315?w=1600&q=85" alt="" className="w-full h-full object-cover object-center" />
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(160deg, rgba(254,243,199,0.92) 0%, rgba(255,237,213,0.90) 100%)' }} />
+          <div className="absolute inset-0 pattern-mandala" />
+        </div>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             label="Simple Process"
             title="Book in 3 Easy Steps"
@@ -223,8 +233,13 @@ export default function Home() {
       </section>
 
       {/* ════════ FEATURED PANDITS ════════ */}
-      <section className="bg-white py-14">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative py-14">
+        <div className="absolute inset-0 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1583939411023-14783179e581?w=1600&q=80" alt="" className="w-full h-full object-cover object-center" />
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(255,228,230,0.90) 0%, rgba(255,241,242,0.88) 100%)' }} />
+          <div className="absolute inset-0 pattern-geometric" />
+        </div>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-end justify-between mb-10">
             <SectionHeader label="Top Pandits" title="Verified & Trusted Pandits" center={false} />
             <Link
@@ -271,8 +286,13 @@ export default function Home() {
       </section>
 
       {/* ════════ WHY US ════════ */}
-      <section className="bg-cream py-14 pattern-geometric">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative py-14">
+        <div className="absolute inset-0 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1548013146-72479768bada?w=1600&q=80" alt="" className="w-full h-full object-cover object-center" />
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(150deg, rgba(253,230,138,0.88) 0%, rgba(254,243,199,0.90) 100%)' }} />
+          <div className="absolute inset-0 pattern-geometric" />
+        </div>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             label="Why Choose Us"
             title="What Makes Us Different"
@@ -303,8 +323,13 @@ export default function Home() {
       </section>
 
       {/* ════════ TESTIMONIALS ════════ */}
-      <section className="bg-white py-14 pattern-rangoli">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative py-14">
+        <div className="absolute inset-0 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1600&q=80" alt="" className="w-full h-full object-cover object-center" />
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(255,247,237,0.91) 0%, rgba(255,228,230,0.88) 100%)' }} />
+          <div className="absolute inset-0 pattern-rangoli" />
+        </div>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             label="Testimonials"
             title="What Families Say"
