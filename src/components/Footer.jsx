@@ -34,13 +34,13 @@ export default function Footer() {
           <div className="lg:col-span-1">
             <Link to="/" className="flex items-center gap-2.5 mb-4">
               <div className="w-9 h-9 rounded-lg gradient-saffron flex items-center justify-center shadow-sm">
-                <span className="text-white text-lg leading-none">🕉</span>
+                <span className="text-white text-lg leading-none">🪔</span>
               </div>
               <span
                 className="text-lg font-bold text-white tracking-tight"
                 style={{ fontFamily: 'Playfair Display, serif' }}
               >
-                Pandit<span className="text-orange-400">Connect</span>
+                Pandit<span className="text-orange-400">Seva</span>
               </span>
             </Link>
             <p className="text-sm text-stone-500 leading-relaxed mb-5">
@@ -106,7 +106,7 @@ export default function Footer() {
             <ul className="space-y-3 mb-5">
               {[
                 { icon: <Phone size={13} />, text: '+91 800 500 8080', sub: 'Mon–Sat, 8AM–8PM' },
-                { icon: <Mail size={13} />, text: 'support@panditconnect.in' },
+                { icon: <Mail size={13} />, text: 'support@panditseva.in' },
                 { icon: <MapPin size={13} />, text: 'Serving 120+ cities across India' },
               ].map(({ icon, text, sub }) => (
                 <li key={text} className="flex items-start gap-2.5">
@@ -139,7 +139,7 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="border-t border-stone-900 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-xs text-stone-600">© 2025 PanditConnect. All rights reserved.</p>
+          <p className="text-xs text-stone-600">© 2025 PanditSeva. All rights reserved.</p>
           <div className="flex items-center gap-5 text-xs text-stone-600">
             {['Privacy Policy', 'Terms of Service', 'Refund Policy'].map((l) => (
               <a key={l} href="#" className="hover:text-orange-400 transition-colors">{l}</a>

@@ -19,11 +19,11 @@ export default function PujasPage() {
   return (
     <div className="min-h-screen bg-cream pattern-rangoli">
       <PageBanner
-        image="https://images.unsplash.com/photo-1545558014-8692077e9b5c?w=1600&q=80"
-        label="Sacred Ceremonies"
-        title="All Pujas & Rituals"
-        subtitle="Find and book pandits for every sacred ceremony — from daily pujas to grand weddings, in your language and tradition."
-        breadcrumb={[{ label: 'Pujas & Rituals' }]}
+        image="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=1600&q=85"
+        label="Sacred Rituals"
+        title="Pujas & Ceremonies"
+        subtitle="Explore our complete collection of sacred ceremonies — from daily havans to grand weddings, in your language and tradition."
+        breadcrumb={[{ label: 'Pujas & Ceremonies' }]}
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">

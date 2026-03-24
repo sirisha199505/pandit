@@ -101,7 +101,7 @@ export default function Login() {
 
               <button type="submit" disabled={loading}
                 className="w-full gradient-saffron text-white font-semibold py-3 rounded-xl hover:opacity-90 active:scale-[0.98] transition-all shadow-saffron disabled:opacity-60 text-sm mt-2">
-                {loading ? 'Signing in…' : 'Login to PanditConnect'}
+                {loading ? 'Signing in…' : 'Login to PanditSeva'}
               </button>
             </form>
 

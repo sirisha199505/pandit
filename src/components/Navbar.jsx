@@ -55,17 +55,17 @@ export default function Navbar() {
           {/* ── Logo ── */}
           <Link to="/" className="flex items-center gap-2.5 shrink-0">
             <div className="w-8 h-8 rounded-lg gradient-saffron flex items-center justify-center shadow-sm">
-              <span className="text-white text-base leading-none">🕉</span>
+              <span className="text-white text-base leading-none">🪔</span>
             </div>
             <div className="leading-none">
               <span
                 className="text-[1.15rem] font-bold tracking-tight"
                 style={{ fontFamily: 'Playfair Display, serif', color: '#881337' }}
               >
-                Pandit<span style={{ color: '#ea580c' }}>Connect</span>
+                Pandit<span style={{ color: '#ea580c' }}>Seva</span>
               </span>
               <p className="text-[10px] text-stone-400 font-normal mt-0.5 leading-none">
-                Book Verified Pandits
+                Every Ritual, Every Tradition
               </p>
             </div>
           </Link>

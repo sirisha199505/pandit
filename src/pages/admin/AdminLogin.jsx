@@ -24,9 +24,9 @@ export default function AdminLogin() {
     <div className="min-h-screen bg-gray-900 flex items-center justify-center px-4">
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
-          <span className="text-4xl block mb-3">🕉️</span>
+          <span className="text-4xl block mb-3">🪔</span>
           <h1 className="text-2xl font-bold text-white">Admin Panel</h1>
-          <p className="text-gray-400 text-sm mt-1">PanditConnect Management</p>
+          <p className="text-gray-400 text-sm mt-1">PanditSeva Management</p>
         </div>
 
         <div className="bg-gray-800 rounded-2xl p-8 border border-gray-700">

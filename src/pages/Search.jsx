@@ -67,10 +67,10 @@ export default function Search() {
   return (
     <div className="min-h-screen bg-cream">
       <PageBanner
-        image="https://images.unsplash.com/photo-1609873814058-a8928924184a?w=1600&q=80"
-        label="Find Pandits"
-        title="Search Pandits Near You"
-        subtitle="Browse verified pandits by tradition, language and ceremony type."
+        image="https://images.unsplash.com/photo-1604999333679-b86d54738315?w=1600&q=85"
+        label="Verified Pandits"
+        title="Find Your Pandit"
+        subtitle="Discover trusted pandits near you — filtered by tradition, language and ceremony type."
         breadcrumb={[{ label: 'Find Pandits' }]}
         align="left"
         height="h-48 md:h-56"

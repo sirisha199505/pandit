@@ -343,7 +343,8 @@ export default function Home() {
       </section>
 
       {/* ════════ CTA ════════ */}
-      <section className="gradient-hero hero-pattern py-16 relative overflow-hidden">
+      <section className="py-16 relative overflow-hidden" style={{ background: 'linear-gradient(150deg, #881337 0%, #9a3412 40%, #c2410c 75%, #d97706 100%)' }}>
+        <div className="absolute inset-0 hero-pattern" />
         <div className="relative max-w-2xl mx-auto text-center px-4">
           <span className="section-label" style={{ background: 'rgba(255,255,255,0.15)', borderColor: 'rgba(255,255,255,0.25)', color: '#fff' }}>
             Get Started Today
@@ -355,7 +356,7 @@ export default function Home() {
             Ready to Book a Sacred Ceremony?
           </h2>
           <p className="text-white/70 text-sm mb-8">
-            Join 45,000+ families who have trusted PanditConnect for their most important moments.
+            Join 45,000+ families who have trusted PanditSeva for their most important moments.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link

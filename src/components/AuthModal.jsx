@@ -116,7 +116,7 @@ function LoginPanel({ switchTo }) {
       {/* Header */}
       <div className="text-center mb-6">
         <div className="w-12 h-12 rounded-xl gradient-saffron flex items-center justify-center text-white text-2xl mx-auto mb-4 shadow-saffron">
-          🕉
+          🪔
         </div>
         <h2 className="text-xl font-bold text-stone-900" style={{ fontFamily: 'Playfair Display, serif' }}>
           Welcome Back
@@ -163,7 +163,7 @@ function LoginPanel({ switchTo }) {
           disabled={loading}
           className="w-full gradient-saffron text-white font-semibold py-3 rounded-xl hover:opacity-90 active:scale-[0.98] transition-all shadow-saffron disabled:opacity-60 text-sm"
         >
-          {loading ? 'Signing in…' : 'Login to PanditConnect'}
+          {loading ? 'Signing in…' : 'Login to PanditSeva'}
         </button>
       </form>
 
@@ -218,12 +218,12 @@ function SignupPanel({ switchTo }) {
     <div className="p-7">
       <div className="text-center mb-6">
         <div className="w-12 h-12 rounded-xl gradient-saffron flex items-center justify-center text-white text-2xl mx-auto mb-4 shadow-saffron">
-          🕉
+          🪔
         </div>
         <h2 className="text-xl font-bold text-stone-900" style={{ fontFamily: 'Playfair Display, serif' }}>
           Create Account
         </h2>
-        <p className="text-sm text-stone-400 mt-1">Join 45,000+ families on PanditConnect</p>
+        <p className="text-sm text-stone-400 mt-1">Join 45,000+ families on PanditSeva</p>
       </div>
 
       {error && (

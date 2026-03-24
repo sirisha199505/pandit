@@ -51,9 +51,9 @@ export default function AdminDashboard() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-14">
             <div className="flex items-center gap-3">
-              <span className="text-xl">🕉️</span>
+              <span className="text-xl">🪔</span>
               <span className="font-bold" style={{ fontFamily: 'Playfair Display, serif' }}>
-                PanditConnect <span className="text-orange-400 text-sm font-normal">Admin</span>
+                PanditSeva <span className="text-orange-400 text-sm font-normal">Admin</span>
               </span>
             </div>
             <div className="flex items-center gap-4">
