@@ -31,99 +31,184 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen ">
+    <div className="min-h-screen mb-20">
 
       {/* ════════ HERO ════════ */}
-      <section className="relative min-h-[88vh] flex flex-col justify-center">
-        {/* Full background image */}
-        <div className="absolute inset-0 overflow-hidden">
+      <section className="relative min-h-[88vh] flex flex-col justify-center overflow-hidden">
+        {/* Lord Ganesha background image */}
+        <div className="absolute inset-0">
           <img
-            src="https://images.unsplash.com/photo-1604999333679-b86d54738315?w=1600&q=85"
-            alt="Pandit performing puja"
+            src="/lord ganesh.jpg"
+            alt="Lord Ganesha"
             className="w-full h-full object-cover object-center"
           />
-          {/* Dark gradient overlay so text is readable */}
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(136,19,55,0.85) 0%, rgba(154,52,18,0.80) 40%, rgba(120,53,15,0.75) 100%)' }} />
-          <div className="absolute inset-0 hero-pattern" />
+          {/* Dark gradient overlay for text readability */}
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(74,0,16,0.82) 0%, rgba(122,21,32,0.75) 35%, rgba(184,74,0,0.65) 70%, rgba(212,114,10,0.60) 100%)' }} />
+          <div className="absolute inset-0 hero-pattern opacity-40" />
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-28">
-          <div className="max-w-2xl mx-auto text-center">
+        {/* Decorative circles */}
+        <div className="absolute -top-20 -right-20 w-96 h-96 rounded-full opacity-10" style={{ background: 'radial-gradient(circle, #FFD700 0%, transparent 70%)' }} />
+        <div className="absolute -bottom-20 -left-20 w-80 h-80 rounded-full opacity-10" style={{ background: 'radial-gradient(circle, #FF6B00 0%, transparent 70%)' }} />
 
-            {/* Trust badge */}
-            <div className="animate-fadeInUp inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white text-xs font-medium px-4 py-2 rounded-full mb-6">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              Trusted by 45,000+ families across India
-            </div>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 w-full">
+          <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
 
-            <h1
-              className="animate-fadeInUp delay-100 text-4xl md:text-[3.5rem] font-bold text-white leading-tight mb-5"
-              style={{ fontFamily: 'Playfair Display, serif' }}
-            >
-              Book Verified Pandits
-              <span className="block text-amber-300 mt-1">for Every Sacred Ritual</span>
-            </h1>
+            {/* ── Left: Text + Search ── */}
+            <div className="flex-1 text-center lg:text-left">
+              {/* Trust badge */}
+              <div className="animate-fadeInUp inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white text-xs font-medium px-4 py-2 rounded-full mb-6">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                Trusted by 45,000+ families across India
+              </div>
 
-            <p className="animate-fadeInUp delay-200 text-white/75 text-base md:text-lg mb-9 max-w-lg mx-auto">
-              Connect with experienced pandits for weddings, pujas and ceremonies —
-              in your language, your tradition, your city.
-            </p>
+              <h1 className="animate-fadeInUp delay-100 text-4xl md:text-[3.25rem] font-bold text-white leading-tight mb-5">
+                Book Verified Pandits
+                <span className="block mt-1" style={{ color: '#FFD700' }}>for Every Sacred Ritual</span>
+              </h1>
 
-            {/* Search card */}
-            <form
-              onSubmit={handleSearch}
-              className="animate-fadeInUp delay-300 bg-white rounded-2xl p-2 shadow-2xl flex flex-col sm:flex-row gap-2 max-w-xl mx-auto"
-            >
-              <label className="flex items-center gap-2.5 flex-1 px-3">
-                <Search size={16} className="text-stone-400 shrink-0" />
-                <input
-                  type="text"
-                  placeholder="Search puja or ceremony..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="flex-1 py-2.5 text-stone-800 placeholder-stone-400 outline-none text-sm bg-transparent"
-                />
-              </label>
+              <p className="animate-fadeInUp delay-200 text-white/75 text-base md:text-lg mb-9 max-w-lg lg:mx-0 mx-auto">
+                Connect with experienced pandits for weddings, pujas and ceremonies —
+                in your language, your tradition, your city.
+              </p>
 
-              <div className="sm:w-px sm:h-auto h-px bg-stone-100 sm:my-2" />
-
-              <label className="flex items-center gap-2.5 flex-1 px-3">
-                <MapPin size={16} className="text-stone-400 shrink-0" />
-                <input
-                  type="text"
-                  placeholder="City or location..."
-                  value={searchLocation}
-                  onChange={(e) => setSearchLocation(e.target.value)}
-                  className="flex-1 py-2.5 text-stone-800 placeholder-stone-400 outline-none text-sm bg-transparent"
-                />
-              </label>
-
-              <button
-                type="submit"
-                className="gradient-saffron text-white font-semibold px-0.5 py-0.3 rounded-xl hover:opacity-90 active:scale-[0.98] transition-all shadow-sm whitespace-nowrap text-sm w-full sm:w-auto"
+              {/* Search card */}
+              <form
+                onSubmit={handleSearch}
+                className="animate-fadeInUp delay-300 bg-white rounded-2xl p-2 shadow-2xl flex flex-col sm:flex-row gap-2 max-w-xl lg:mx-0 mx-auto"
               >
-                Find Pandits
-              </button>
-            </form>
+                <label className="flex items-center gap-2.5 flex-1 px-3">
+                  <Search size={16} className="text-stone-400 shrink-0" />
+                  <input
+                    type="text"
+                    placeholder="Search puja or ceremony..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="flex-1 py-2.5 text-stone-800 placeholder-stone-400 outline-none text-sm bg-transparent"
+                  />
+                </label>
 
-            {/* Quick tags */}
-            <div className="animate-fadeInUp delay-400 flex flex-wrap justify-center gap-2 mt-5">
-              {['Satyanarayana Puja', 'Griha Pravesh', 'Wedding', 'Ganesh Puja'].map((tag) => (
+                <div className="sm:w-px sm:h-auto h-px bg-stone-200 sm:my-2" />
+
+                <label className="flex items-center gap-2.5 flex-1 px-3">
+                  <MapPin size={16} className="text-stone-400 shrink-0" />
+                  <input
+                    type="text"
+                    placeholder="City or location..."
+                    value={searchLocation}
+                    onChange={(e) => setSearchLocation(e.target.value)}
+                    className="flex-1 py-2.5 text-stone-800 placeholder-stone-400 outline-none text-sm bg-transparent"
+                  />
+                </label>
+
                 <button
-                  key={tag}
-                  onClick={() => navigate(`/search?q=${encodeURIComponent(tag)}`)}
-                  className="text-white/70 hover:text-white text-xs border border-white/25 hover:border-white/60 hover:bg-white/10 px-3 py-1.5 rounded-full transition-all"
+                  type="submit"
+                  className="gradient-saffron text-white font-semibold rounded-xl px-2.5 py-2.5 hover:opacity-90 active:scale-[0.98] transition-all shadow-sm whitespace-nowrap text-sm w-full sm:w-auto"
                 >
-                  {tag}
+                  Find Pandits
                 </button>
-              ))}
+              </form>
+
+              {/* Quick tags */}
+              <div className="animate-fadeInUp delay-400 flex flex-wrap justify-center lg:justify-start gap-2 mt-5">
+                {['Satyanarayana Puja', 'Griha Pravesh', 'Wedding', 'Ganesh Puja'].map((tag) => (
+                  <button
+                    key={tag}
+                    onClick={() => navigate(`/search?q=${encodeURIComponent(tag)}`)}
+                    className="text-white/70 hover:text-white text-xs border border-white/25 hover:border-white/60 hover:bg-white/10 px-3 py-1.5 rounded-full transition-all"
+                  >
+                    {tag}
+                  </button>
+                ))}
+              </div>
             </div>
+
+            {/* ── Right: God Images ── */}
+            <div className="animate-fadeInUp delay-300 flex-shrink-0 flex flex-col items-center gap-4">
+              {/* Main deity image – Lord Ganesha */}
+              <div className="relative">
+                <div className="absolute inset-0 rounded-full blur-2xl opacity-40" style={{ background: 'radial-gradient(circle, #FFD700 0%, #FF6B00 60%, transparent 100%)' }} />
+                <div
+                  className="relative w-60 h-60 md:w-72 md:h-72 rounded-full overflow-hidden border-4 shadow-2xl"
+                  style={{ borderColor: '#FFD700', boxShadow: '0 0 40px rgba(255,215,0,0.4), 0 0 80px rgba(224,93,0,0.3)' }}
+                >
+                  <img
+                    src="https://thumbs.dreamstime.com/b/digital-artwork-lord-vinayaka-ganesha-positioned-centrally-ambient-warm-lighting-reflects-serene-temple-environment-390515690.jpg"
+                    alt="Lord Ganesha"
+                    className="w-full h-full object-cover object-center"
+                  />
+                </div>
+                {/* Om symbol badge */}
+                <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-xs font-bold" style={{ background: '#FFD700', color: '#4A0010' }}>
+                  ॐ श्री गणेशाय नमः
+                </div>
+              </div>
+
+              {/* Two smaller deity images */}
+              <div className="flex gap-4 mt-3">
+                <div className="relative">
+                  <div
+                    className="w-24 h-24 rounded-2xl overflow-hidden border-2 shadow-lg"
+                    style={{ borderColor: 'rgba(255,215,0,0.5)' }}
+                  >
+                    <img
+                      src="https://i.pinimg.com/474x/66/41/53/66415315048113072cbcd6a72eb2ee52.jpg"
+                      alt="Lord Vishnu"
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        e.target.parentElement.style.background = 'linear-gradient(135deg,#B84A00,#7A1520)';
+                        e.target.style.display = 'none';
+                        e.target.parentElement.innerHTML += '<span style="color:#FFD700;font-size:2rem;display:flex;align-items:center;justify-content:center;height:100%">🪔</span>';
+                      }}
+                    />
+                  </div>
+                  <p className="text-center text-white/60 text-[10px] mt-1">Vishnu</p>
+                </div>
+                <div className="relative">
+                  <div
+                    className="w-24 h-24 rounded-2xl overflow-hidden border-2 shadow-lg"
+                    style={{ borderColor: 'rgba(255,215,0,0.5)' }}
+                  >
+                    <img
+                      src="https://m.media-amazon.com/images/I/71d+3vXIfGL._AC_UF894,1000_QL80_.jpg"
+                      alt="Lord Shiva"
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        e.target.parentElement.style.background = 'linear-gradient(135deg,#B84A00,#7A1520)';
+                        e.target.style.display = 'none';
+                        e.target.parentElement.innerHTML += '<span style="color:#FFD700;font-size:2rem;display:flex;align-items:center;justify-content:center;height:100%">🕉️</span>';
+                      }}
+                    />
+                  </div>
+                  <p className="text-center text-white/60 text-[10px] mt-1">Shiva</p>
+                </div>
+                <div className="relative">
+                  <div
+                    className="w-24 h-24 rounded-2xl overflow-hidden border-2 shadow-lg"
+                    style={{ borderColor: 'rgba(255,215,0,0.5)' }}
+                  >
+                    <img
+                      src="https://www.cliths.com/cdn/shop/files/81VjwgbYBzL._SL1500_medium.jpg?v=1752900799"
+                      alt="Goddess Lakshmi"
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        e.target.parentElement.style.background = 'linear-gradient(135deg,#B84A00,#7A1520)';
+                        e.target.style.display = 'none';
+                        e.target.parentElement.innerHTML += '<span style="color:#FFD700;font-size:2rem;display:flex;align-items:center;justify-content:center;height:100%">🌸</span>';
+                      }}
+                    />
+                  </div>
+                  <p className="text-center text-white/60 text-[10px] mt-1">Lakshmi</p>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
 
         {/* Wave transition */}
         <div className="relative">
-          <svg viewBox="0 0 1440 56" className="w-full block relative z-10" preserveAspectRatio="none" style={{ fill: '#fafaf7', marginBottom: -2 }}>
+          <svg viewBox="0 0 1440 56" className="w-full block relative z-10" preserveAspectRatio="none" style={{ fill: '#FFFDF5', marginBottom: -2 }}>
             <path d="M0,28 C480,56 960,0 1440,28 L1440,56 L0,56 Z" />
           </svg>
         </div>
@@ -147,8 +232,8 @@ export default function Home() {
       {/* ════════ CATEGORIES ════════ */}
       <section className="relative py-14">
         <div className="absolute inset-0 overflow-hidden">
-          <img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=1600&q=80" alt="" className="w-full h-full object-cover object-center" />
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(255,237,213,0.92) 0%, rgba(254,243,199,0.88) 100%)' }} />
+          <img src="/ganesh1.jpg" alt="" className="w-full h-full object-cover object-center" />
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(255,237,213,0.88) 0%, rgba(254,243,199,0.84) 100%)' }} />
           <div className="absolute inset-0 pattern-rangoli" />
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -196,8 +281,8 @@ export default function Home() {
       {/* ════════ HOW IT WORKS ════════ */}
       <section className="relative py-14">
         <div className="absolute inset-0 overflow-hidden">
-          <img src="https://images.unsplash.com/photo-1604999333679-b86d54738315?w=1600&q=85" alt="" className="w-full h-full object-cover object-center" />
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(160deg, rgba(254,243,199,0.92) 0%, rgba(255,237,213,0.90) 100%)' }} />
+          <img src="/ganesh2.jpg" alt="" className="w-full h-full object-cover object-center" />
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(160deg, rgba(254,243,199,0.88) 0%, rgba(255,237,213,0.85) 100%)' }} />
           <div className="absolute inset-0 pattern-mandala" />
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -235,8 +320,8 @@ export default function Home() {
       {/* ════════ FEATURED PANDITS ════════ */}
       <section className="relative py-14">
         <div className="absolute inset-0 overflow-hidden">
-          <img src="https://images.unsplash.com/photo-1583939411023-14783179e581?w=1600&q=80" alt="" className="w-full h-full object-cover object-center" />
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(255,228,230,0.90) 0%, rgba(255,241,242,0.88) 100%)' }} />
+          <img src="/ganesh3.jpg" alt="" className="w-full h-full object-cover object-center" />
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(255,228,230,0.88) 0%, rgba(255,241,242,0.85) 100%)' }} />
           <div className="absolute inset-0 pattern-geometric" />
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -288,8 +373,8 @@ export default function Home() {
       {/* ════════ WHY US ════════ */}
       <section className="relative py-14">
         <div className="absolute inset-0 overflow-hidden">
-          <img src="https://images.unsplash.com/photo-1548013146-72479768bada?w=1600&q=80" alt="" className="w-full h-full object-cover object-center" />
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(150deg, rgba(253,230,138,0.88) 0%, rgba(254,243,199,0.90) 100%)' }} />
+          <img src="/lord ganesh.jpg" alt="" className="w-full h-full object-cover object-center" />
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(150deg, rgba(253,230,138,0.86) 0%, rgba(254,243,199,0.88) 100%)' }} />
           <div className="absolute inset-0 pattern-geometric" />
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -325,8 +410,8 @@ export default function Home() {
       {/* ════════ TESTIMONIALS ════════ */}
       <section className="relative py-14">
         <div className="absolute inset-0 overflow-hidden">
-          <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1600&q=80" alt="" className="w-full h-full object-cover object-center" />
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(255,247,237,0.91) 0%, rgba(255,228,230,0.88) 100%)' }} />
+          <img src="/ganesh1.jpg" alt="" className="w-full h-full object-cover object-center" />
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(255,247,237,0.88) 0%, rgba(255,228,230,0.85) 100%)' }} />
           <div className="absolute inset-0 pattern-rangoli" />
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -376,7 +461,7 @@ export default function Home() {
           </span>
           <h2
             className="text-3xl md:text-4xl font-bold text-white mb-4"
-            style={{ fontFamily: 'Playfair Display, serif' }}
+            style={{ fontFamily: 'Noto Serif, serif' }}
           >
             Ready to Book a Sacred Ceremony?
           </h2>

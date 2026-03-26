@@ -54,15 +54,19 @@ export default function Navbar() {
 
           {/* ── Logo ── */}
           <Link to="/" className="flex items-center gap-2.5 shrink-0">
-            <div className="w-8 h-8 rounded-lg gradient-saffron flex items-center justify-center shadow-sm">
-              <span className="text-white text-base leading-none">🪔</span>
+            <div className="w-9 h-9 rounded-full overflow-hidden border-2 shadow-sm" style={{ borderColor: '#E05D00' }}>
+              <img
+                src="/lord ganesh.jpg"
+                alt="Lord Ganesha"
+                className="w-full h-full object-cover object-center"
+              />
             </div>
             <div className="leading-none">
               <span
                 className="text-[1.15rem] font-bold tracking-tight"
-                style={{ fontFamily: 'Playfair Display, serif', color: '#881337' }}
+                style={{ fontFamily: 'Noto Serif, serif', color: '#8B0020' }}
               >
-                Pandit<span style={{ color: '#ea580c' }}>Seva</span>
+                Pandit<span style={{ color: '#E05D00' }}>Seva</span>
               </span>
               <p className="text-[10px] text-stone-400 font-normal mt-0.5 leading-none">
                 Every Ritual, Every Tradition

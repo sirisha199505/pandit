@@ -2,11 +2,11 @@
 
 @layer base {
   :root {
-    --saffron: #ea580c;
-    --gold: #b45309;
-    --maroon: #881337;
-    --cream: #fafaf7;
-    --cream-dark: #f5f0e8;
+    --saffron: #E05D00;
+    --gold: #B8860B;
+    --maroon: #8B0020;
+    --cream: #FFFDF5;
+    --cream-dark: #FFF3DC;
   }
 
   *, *::before, *::after {
@@ -20,46 +20,46 @@
   }
 
   body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #fafaf7;
-    color: #1c1917;
-    line-height: 1.6;
+    font-family: 'Noto Sans', sans-serif;
+    background-color: #FFFDF5;
+    color: #1A0A00;
+    line-height: 1.7;
   }
 
   h1, h2, h3, h4 {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Noto Serif', serif;
     line-height: 1.25;
-    color: #1c1917;
+    color: #1A0A00;
   }
 
   input, select, textarea, button {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Noto Sans', sans-serif;
   }
 }
 
 @layer utilities {
   /* Brand colors */
-  .text-saffron  { color: #ea580c; }
-  .text-gold     { color: #b45309; }
-  .text-maroon   { color: #881337; }
-  .bg-saffron    { background-color: #ea580c; }
-  .bg-gold       { background-color: #b45309; }
-  .bg-cream      { background-color: #fafaf7; }
-  .bg-cream-dark { background-color: #f5f0e8; }
-  .border-saffron { border-color: #ea580c; }
+  .text-saffron  { color: #E05D00; }
+  .text-gold     { color: #B8860B; }
+  .text-maroon   { color: #8B0020; }
+  .bg-saffron    { background-color: #E05D00; }
+  .bg-gold       { background-color: #B8860B; }
+  .bg-cream      { background-color: #FFFDF5; }
+  .bg-cream-dark { background-color: #FFF3DC; }
+  .border-saffron { border-color: #E05D00; }
 
   /* Gradients */
   .gradient-saffron {
-    background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
+    background: linear-gradient(135deg, #E05D00 0%, #B84A00 100%);
   }
   .gradient-gold {
-    background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+    background: linear-gradient(135deg, #D4A017 0%, #B8860B 100%);
   }
   .gradient-hero {
-    background: linear-gradient(150deg, #881337 0%, #9a3412 40%, #c2410c 75%, #d97706 100%);
+    background: linear-gradient(150deg, #4A0010 0%, #8B0020 30%, #C04000 65%, #E05D00 100%);
   }
   .gradient-warm {
-    background: linear-gradient(135deg, #fff7ed 0%, #fafaf7 100%);
+    background: linear-gradient(135deg, #FFF8EC 0%, #FFFDF5 100%);
   }
 
   /* Shadows */
@@ -67,18 +67,18 @@
     box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
   }
   .shadow-card-hover {
-    box-shadow: 0 4px 12px rgba(234,88,12,0.12), 0 12px 32px rgba(234,88,12,0.08);
+    box-shadow: 0 4px 12px rgba(224,93,0,0.14), 0 12px 32px rgba(224,93,0,0.09);
   }
   .shadow-saffron {
-    box-shadow: 0 4px 20px rgba(234, 88, 12, 0.25);
+    box-shadow: 0 4px 20px rgba(224, 93, 0, 0.28);
   }
   .shadow-input {
-    box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.12);
+    box-shadow: 0 0 0 3px rgba(224, 93, 0, 0.13);
   }
 
   /* Glass morphism */
   .glass {
-    background: rgba(255, 255, 255, 0.92);
+    background: rgba(255, 253, 245, 0.93);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
   }
@@ -89,13 +89,13 @@
     align-items: center;
     gap: 0.375rem;
     font-size: 0.6875rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
+    font-weight: 700;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: #ea580c;
+    color: #8B0020;
     padding: 0.25rem 0.75rem;
-    background: #fff7ed;
-    border: 1px solid #fed7aa;
+    background: #FFF0F0;
+    border: 1px solid #FBBCBC;
     border-radius: 999px;
     margin-bottom: 0.75rem;
   }
@@ -104,20 +104,20 @@
   .input-base {
     width: 100%;
     padding: 0.625rem 0.875rem;
-    border: 1.5px solid #e7e5e4;
+    border: 1.5px solid #E8D5B0;
     border-radius: 0.625rem;
     font-size: 0.875rem;
-    color: #1c1917;
+    color: #1A0A00;
     background: #fff;
     outline: none;
     transition: border-color 0.15s, box-shadow 0.15s;
   }
   .input-base:focus {
-    border-color: #ea580c;
-    box-shadow: 0 0 0 3px rgba(234,88,12,0.1);
+    border-color: #E05D00;
+    box-shadow: 0 0 0 3px rgba(224,93,0,0.12);
   }
   .input-base::placeholder {
-    color: #a8a29e;
+    color: #B09070;
   }
 }
 
@@ -157,8 +157,8 @@
 /* ─── Scrollbar ─── */
 ::-webkit-scrollbar       { width: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #d6d3d1; border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: #ea580c; }
+::-webkit-scrollbar-thumb { background: #D4B896; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #E05D00; }
 
 /* ─── Line clamp ─── */
 .line-clamp-2 {
@@ -179,49 +179,49 @@
   background-image:
     radial-gradient(circle at 20% 50%, rgba(255,255,255,0.04) 0%, transparent 50%),
     radial-gradient(circle at 80% 20%, rgba(255,255,255,0.06) 0%, transparent 40%),
-    radial-gradient(circle at 60% 80%, rgba(0,0,0,0.08) 0%, transparent 40%);
+    radial-gradient(circle at 60% 80%, rgba(0,0,0,0.10) 0%, transparent 40%);
 }
 
 /* ─── Card base ─── */
 .card {
   background: #fff;
   border-radius: 1rem;
-  border: 1px solid #f0ede8;
+  border: 1px solid #F0E4CC;
   box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 4px 16px rgba(0,0,0,0.03);
   transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 .card:hover {
-  box-shadow: 0 4px 12px rgba(234,88,12,0.1), 0 12px 32px rgba(234,88,12,0.06);
-  border-color: #fcd9be;
+  box-shadow: 0 4px 12px rgba(224,93,0,0.12), 0 12px 32px rgba(224,93,0,0.07);
+  border-color: #F9C88A;
 }
 
 /* ─── Indian-inspired background patterns ─── */
 
-/* Rangoli dot grid — subtle orange dots like a rangoli floor pattern */
+/* Rangoli dot grid */
 .pattern-rangoli {
   background-image:
-    radial-gradient(circle, rgba(234, 88, 12, 0.10) 1.5px, transparent 1.5px),
-    radial-gradient(circle, rgba(180, 83, 9, 0.05) 1px, transparent 1px);
+    radial-gradient(circle, rgba(224, 93, 0, 0.11) 1.5px, transparent 1.5px),
+    radial-gradient(circle, rgba(184, 134, 11, 0.06) 1px, transparent 1px);
   background-size: 28px 28px, 56px 56px;
   background-position: 0 0, 14px 14px;
 }
 
-/* Mandala-like soft glow from corners and edges */
+/* Mandala-like soft glow */
 .pattern-mandala {
   background-image:
-    radial-gradient(ellipse 55% 80% at 5% 50%, rgba(234, 88, 12, 0.06) 0%, transparent 70%),
-    radial-gradient(ellipse 55% 80% at 95% 50%, rgba(180, 83, 9, 0.05) 0%, transparent 70%),
-    radial-gradient(ellipse 80% 45% at 50% 5%, rgba(136, 19, 55, 0.04) 0%, transparent 70%),
-    radial-gradient(ellipse 80% 45% at 50% 95%, rgba(234, 88, 12, 0.04) 0%, transparent 70%);
+    radial-gradient(ellipse 55% 80% at 5% 50%, rgba(224, 93, 0, 0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 55% 80% at 95% 50%, rgba(184, 134, 11, 0.05) 0%, transparent 70%),
+    radial-gradient(ellipse 80% 45% at 50% 5%, rgba(139, 0, 32, 0.04) 0%, transparent 70%),
+    radial-gradient(ellipse 80% 45% at 50% 95%, rgba(224, 93, 0, 0.04) 0%, transparent 70%);
 }
 
-/* Temple-inspired fine grid — like kolam / floor tilework */
+/* Temple-inspired fine grid */
 .pattern-geometric {
   background-image:
-    linear-gradient(rgba(234, 88, 12, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(234, 88, 12, 0.06) 1px, transparent 1px),
-    linear-gradient(rgba(180, 83, 9, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(180, 83, 9, 0.03) 1px, transparent 1px);
+    linear-gradient(rgba(224, 93, 0, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(224, 93, 0, 0.06) 1px, transparent 1px),
+    linear-gradient(rgba(184, 134, 11, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(184, 134, 11, 0.03) 1px, transparent 1px);
   background-size: 40px 40px, 40px 40px, 8px 8px, 8px 8px;
 }
 
@@ -230,7 +230,7 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  color: #d6cfc7;
+  color: #C4A882;
   font-size: 0.75rem;
   letter-spacing: 0.05em;
 }
@@ -239,5 +239,5 @@
   content: '';
   flex: 1;
   height: 1px;
-  background: linear-gradient(90deg, transparent, #e7e5e4, transparent);
+  background: linear-gradient(90deg, transparent, #E8D5B0, transparent);
 }

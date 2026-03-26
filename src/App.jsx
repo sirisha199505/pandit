@@ -25,20 +25,62 @@ import PanditDashboard from './pages/pandit/PanditDashboard';
 import AdminLogin     from './pages/admin/AdminLogin';
 import AdminDashboard from './pages/admin/AdminDashboard';
 
+function GaneshBg({ src }) {
+  return (
+    <div
+      aria-hidden="true"
+      style={{
+        position: 'fixed',
+        inset: 0,
+        zIndex: 0,
+        pointerEvents: 'none',
+      }}
+    >
+      <img
+        src={src}
+        alt=""
+        style={{
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          objectPosition: 'center',
+          opacity: 0.10,
+        }}
+      />
+    </div>
+  );
+}
+
 function MainLayout({ children }) {
   return (
-    <div className="flex flex-col min-h-screen">
-      <Navbar />
-      <main className="flex-1">{children}</main>
-      <Footer />
-      {/* Auth modals — always mounted inside Router so they can navigate */}
-      <AuthModal />
+    <div className="flex flex-col min-h-screen relative">
+      <GaneshBg src="/ganesh3.jpg" />
+      <div className="relative z-10 flex flex-col min-h-screen">
+        <Navbar />
+        <main className="flex-1">{children}</main>
+        <Footer />
+        <AuthModal />
+      </div>
     </div>
   );
 }
 
 function FullLayout({ children }) {
-  return <div className="min-h-screen">{children}</div>;
+  return (
+    <div className="min-h-screen relative">
+      <GaneshBg src="/ganesh1.jpg" />
+      <div className="relative z-10 min-h-screen">{children}</div>
+    </div>
+  );
+}
+
+function DashLayout({ children }) {
+  return (
+    <div className="min-h-screen relative">
+      <GaneshBg src="/ganesh2.jpg" />
+      <div className="relative z-10 min-h-screen">{children}</div>
+    </div>
+  );
 }
 
 export default function App() {
@@ -63,11 +105,11 @@ export default function App() {
             {/* Pandit */}
             <Route path="/pandit/login"      element={<FullLayout><PanditLogin    /></FullLayout>} />
             <Route path="/pandit/register"   element={<FullLayout><PanditRegister /></FullLayout>} />
-            <Route path="/pandit/dashboard"  element={<FullLayout><PanditDashboard /></FullLayout>} />
+            <Route path="/pandit/dashboard"  element={<DashLayout><PanditDashboard /></DashLayout>} />
 
             {/* Admin */}
             <Route path="/admin"             element={<FullLayout><AdminLogin     /></FullLayout>} />
-            <Route path="/admin/dashboard"   element={<FullLayout><AdminDashboard /></FullLayout>} />
+            <Route path="/admin/dashboard"   element={<DashLayout><AdminDashboard /></DashLayout>} />
           </Routes>
         </Router>
       </ModalProvider>
