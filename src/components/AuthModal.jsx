@@ -118,7 +118,7 @@ function LoginPanel({ switchTo }) {
         <div className="w-12 h-12 rounded-full overflow-hidden border-2 mx-auto mb-4 shadow-saffron" style={{ borderColor: '#E05D00' }}>
           <img src="/lord ganesh.jpg" alt="Lord Ganesha" className="w-full h-full object-cover object-top" />
         </div>
-        <h2 className="text-xl font-bold text-stone-900" style={{ fontFamily: 'Playfair Display, serif' }}>
+        <h2 className="text-xl font-bold text-stone-900" style={{ fontFamily: 'Noto Serif, serif' }}>
           Welcome Back
         </h2>
         <p className="text-sm text-stone-400 mt-1">Login to manage your bookings</p>
@@ -220,7 +220,7 @@ function SignupPanel({ switchTo }) {
         <div className="w-12 h-12 rounded-full overflow-hidden border-2 mx-auto mb-4 shadow-saffron" style={{ borderColor: '#E05D00' }}>
           <img src="/lord ganesh.jpg" alt="Lord Ganesha" className="w-full h-full object-cover object-top" />
         </div>
-        <h2 className="text-xl font-bold text-stone-900" style={{ fontFamily: 'Playfair Display, serif' }}>
+        <h2 className="text-xl font-bold text-stone-900" style={{ fontFamily: 'Noto Serif, serif' }}>
           Create Account
         </h2>
         <p className="text-sm text-stone-400 mt-1">Join 45,000+ families on PanditSeva</p>
@@ -295,10 +295,10 @@ function PanditLoginPanel({ switchTo }) {
   return (
     <div className="p-7">
       <div className="text-center mb-6">
-        <div className="w-12 h-12 rounded-xl gradient-saffron flex items-center justify-center text-white text-2xl mx-auto mb-4 shadow-saffron">
-          👳
+        <div className="w-12 h-12 rounded-full overflow-hidden border-2 mx-auto mb-4 shadow-saffron" style={{ borderColor: '#E05D00' }}>
+          <img src="/lord ganesh.jpg" alt="Lord Ganesha" className="w-full h-full object-cover object-top" />
         </div>
-        <h2 className="text-xl font-bold text-stone-900" style={{ fontFamily: 'Playfair Display, serif' }}>
+        <h2 className="text-xl font-bold text-stone-900" style={{ fontFamily: 'Noto Serif, serif' }}>
           Pandit Portal
         </h2>
         <p className="text-sm text-stone-400 mt-1">Access your dashboard and bookings</p>
