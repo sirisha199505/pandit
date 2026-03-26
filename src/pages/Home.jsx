@@ -13,8 +13,12 @@ import StarRating from '../components/StarRating';
 function SectionHeader({ label, title, subtitle, center = true }) {
   return (
     <div className={`mb-10 ${center ? 'text-center' : ''}`}>
-      <span className="section-label">{label}</span>
+      <span className="section-label" style={{ color: '#D4AF37', background: '#FFFBEA', borderColor: '#D4AF37' }}>{label}</span>
       <h2 className="text-2xl md:text-3xl font-bold text-stone-900">{title}</h2>
+      <div className={`flex mt-2 mb-1 ${center ? 'justify-center' : ''}`}>
+        <div className="h-0.5 w-12 rounded-full" style={{ background: 'linear-gradient(90deg, #D4AF37, #FFD700)' }} />
+        <div className="h-0.5 w-4 rounded-full ml-1" style={{ background: '#D4AF37', opacity: 0.4 }} />
+      </div>
       {subtitle && <p className="text-stone-500 text-sm mt-2 max-w-xl mx-auto">{subtitle}</p>}
     </div>
   );
@@ -219,9 +223,9 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {stats.map((stat, i) => (
-              <div key={i} className="card flex flex-col items-center text-center p-5">
+              <div key={i} className="card flex flex-col items-center text-center p-5" style={{ borderTop: '3px solid #D4AF37' }}>
                 <span className="text-3xl mb-2">{stat.icon}</span>
-                <p className="text-2xl font-bold text-saffron">{stat.value}</p>
+                <p className="text-2xl font-bold" style={{ color: '#D4AF37' }}>{stat.value}</p>
                 <p className="text-xs text-stone-500 mt-0.5">{stat.label}</p>
               </div>
             ))}
@@ -233,7 +237,7 @@ export default function Home() {
       <section className="relative py-14">
         <div className="absolute inset-0 overflow-hidden">
           <img src="/ganesh1.jpg" alt="" className="w-full h-full object-cover object-center" />
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(255,237,213,0.88) 0%, rgba(254,243,199,0.84) 100%)' }} />
+          <div className="absolute inset-0" style={{ background: 'rgba(255,255,255,0.50)' }} />
           <div className="absolute inset-0 pattern-rangoli" />
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -282,7 +286,7 @@ export default function Home() {
       <section className="relative py-14">
         <div className="absolute inset-0 overflow-hidden">
           <img src="/ganesh2.jpg" alt="" className="w-full h-full object-cover object-center" />
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(160deg, rgba(254,243,199,0.88) 0%, rgba(255,237,213,0.85) 100%)' }} />
+          <div className="absolute inset-0" style={{ background: 'rgba(255,255,255,0.50)' }} />
           <div className="absolute inset-0 pattern-mandala" />
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -293,7 +297,7 @@ export default function Home() {
           />
           <div className="relative grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Connector */}
-            <div className="hidden md:block absolute top-[52px] left-[calc(16.66%+32px)] right-[calc(16.66%+32px)] h-px border-t-2 border-dashed border-orange-200" />
+            <div className="hidden md:block absolute top-[52px] left-[calc(16.66%+32px)] right-[calc(16.66%+32px)] h-px border-t-2 border-dashed" style={{ borderColor: '#D4AF37' }} />
 
             {[
               { step: 1, icon: '🔍', title: 'Search & Select', desc: "Choose your puja, tradition, language and preferred date. We'll show the best-matched pandits." },
@@ -305,7 +309,7 @@ export default function Home() {
                   <div className="w-[104px] h-[104px] rounded-2xl gradient-saffron flex items-center justify-center text-5xl shadow-saffron group-hover:scale-105 transition-transform duration-200">
                     {item.icon}
                   </div>
-                  <span className="absolute -top-2 -right-2 w-7 h-7 bg-white border-2 border-orange-400 rounded-full flex items-center justify-center text-xs font-bold text-saffron shadow-sm">
+                  <span className="absolute -top-2 -right-2 w-7 h-7 bg-white border-2 rounded-full flex items-center justify-center text-xs font-bold shadow-sm" style={{ borderColor: '#D4AF37', color: '#D4AF37' }}>
                     {item.step}
                   </span>
                 </div>
@@ -321,7 +325,7 @@ export default function Home() {
       <section className="relative py-14">
         <div className="absolute inset-0 overflow-hidden">
           <img src="/ganesh3.jpg" alt="" className="w-full h-full object-cover object-center" />
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(255,228,230,0.88) 0%, rgba(255,241,242,0.85) 100%)' }} />
+          <div className="absolute inset-0" style={{ background: 'rgba(255,255,255,0.50)' }} />
           <div className="absolute inset-0 pattern-geometric" />
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -341,7 +345,7 @@ export default function Home() {
       </section>
 
       {/* ════════ MUHURAT BANNER ════════ */}
-      <section className="bg-amber-50 border-y border-amber-100 py-10">
+      <section className="py-10" style={{ background: 'linear-gradient(135deg, #FFFBEA 0%, #FFF8DC 100%)', borderTop: '2px solid #D4AF37', borderBottom: '2px solid #D4AF37' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-center gap-6">
             <div className="text-5xl animate-float shrink-0">🗓️</div>
@@ -374,7 +378,7 @@ export default function Home() {
       <section className="relative py-14">
         <div className="absolute inset-0 overflow-hidden">
           <img src="/lord ganesh.jpg" alt="" className="w-full h-full object-cover object-center" />
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(150deg, rgba(253,230,138,0.86) 0%, rgba(254,243,199,0.88) 100%)' }} />
+          <div className="absolute inset-0" style={{ background: 'rgba(255,255,255,0.50)' }} />
           <div className="absolute inset-0 pattern-geometric" />
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -396,7 +400,7 @@ export default function Home() {
                 key={i}
                 className="card p-6 group"
               >
-                <div className="w-10 h-10 rounded-xl bg-orange-50 group-hover:bg-orange-100 flex items-center justify-center text-saffron mb-4 transition-colors duration-200">
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-4 transition-colors duration-200" style={{ background: '#FFFBEA', color: '#D4AF37', border: '1.5px solid #D4AF37' }}>
                   {feat.icon}
                 </div>
                 <h3 className="font-bold text-stone-900 mb-1.5 text-sm">{feat.title}</h3>
@@ -411,7 +415,7 @@ export default function Home() {
       <section className="relative py-14">
         <div className="absolute inset-0 overflow-hidden">
           <img src="/ganesh1.jpg" alt="" className="w-full h-full object-cover object-center" />
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(255,247,237,0.88) 0%, rgba(255,228,230,0.85) 100%)' }} />
+          <div className="absolute inset-0" style={{ background: 'rgba(255,255,255,0.50)' }} />
           <div className="absolute inset-0 pattern-rangoli" />
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -427,7 +431,7 @@ export default function Home() {
                 className="card p-6 relative flex flex-col"
               >
                 {/* Quote mark */}
-                <span className="absolute top-5 right-5 text-orange-100 text-5xl font-serif leading-none select-none">
+                <span className="absolute top-5 right-5 text-5xl font-serif leading-none select-none" style={{ color: '#D4AF37', opacity: 0.35 }}>
                   "
                 </span>
                 <StarRating rating={t.rating} size={13} />
@@ -436,7 +440,7 @@ export default function Home() {
                   <img
                     src={t.photo}
                     alt={t.name}
-                    className="w-9 h-9 rounded-full object-cover border-2 border-orange-100"
+                    className="w-9 h-9 rounded-full object-cover border-2" style={{ borderColor: '#D4AF37' }}
                     onError={(e) => {
                       e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(t.name)}&background=ea580c&color=fff`;
                     }}
@@ -471,13 +475,15 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
               to="/pujas"
-              className="bg-white text-saffron font-semibold px-7 py-3 rounded-xl hover:bg-orange-50 transition-all shadow-md text-sm"
+              className="font-semibold px-7 py-3 rounded-xl transition-all shadow-md text-sm"
+              style={{ background: '#D4AF37', color: '#4A0010' }}
             >
               Book a Puja Now
             </Link>
             <Link
               to="/pandit/register"
-              className="border-2 border-white/50 hover:border-white text-white font-semibold px-7 py-3 rounded-xl hover:bg-white/10 transition-all text-sm"
+              className="font-semibold px-7 py-3 rounded-xl transition-all text-sm"
+              style={{ border: '2px solid #D4AF37', color: '#FFD700' }}
             >
               Register as Pandit
             </Link>

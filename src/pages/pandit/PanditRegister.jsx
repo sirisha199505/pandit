@@ -67,9 +67,11 @@ export default function PanditRegister() {
       <div className="max-w-2xl mx-auto">
         <div className="text-center mb-8">
           <Link to="/" className="inline-flex items-center gap-2 mb-4">
-            <span className="text-3xl">🕉️</span>
-            <span className="text-2xl font-bold text-maroon" style={{ fontFamily: 'Playfair Display, serif' }}>
-              Pandit<span className="text-saffron">Connect</span>
+            <div className="w-10 h-10 rounded-full overflow-hidden border-2 shadow-sm" style={{ borderColor: '#E05D00' }}>
+              <img src="/lord ganesh.jpg" alt="Lord Ganesha" className="w-full h-full object-cover object-top" />
+            </div>
+            <span className="text-2xl font-bold text-maroon" style={{ fontFamily: 'Noto Serif, serif' }}>
+              Pandit<span className="text-saffron">Seva</span>
             </span>
           </Link>
           <h1 className="text-2xl font-bold text-gray-900">Register as Pandit</h1>

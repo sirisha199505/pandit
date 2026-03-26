@@ -3,7 +3,7 @@
 @layer base {
   :root {
     --saffron: #E05D00;
-    --gold: #B8860B;
+    --gold: #D4AF37;
     --maroon: #8B0020;
     --cream: #FFFDF5;
     --cream-dark: #FFF3DC;
@@ -40,10 +40,10 @@
 @layer utilities {
   /* Brand colors */
   .text-saffron  { color: #E05D00; }
-  .text-gold     { color: #B8860B; }
+  .text-gold     { color: #D4AF37; }
   .text-maroon   { color: #8B0020; }
   .bg-saffron    { background-color: #E05D00; }
-  .bg-gold       { background-color: #B8860B; }
+  .bg-gold       { background-color: #D4AF37; }
   .bg-cream      { background-color: #FFFDF5; }
   .bg-cream-dark { background-color: #FFF3DC; }
   .border-saffron { border-color: #E05D00; }
@@ -53,7 +53,7 @@
     background: linear-gradient(135deg, #E05D00 0%, #B84A00 100%);
   }
   .gradient-gold {
-    background: linear-gradient(135deg, #D4A017 0%, #B8860B 100%);
+    background: linear-gradient(135deg, #FFD700 0%, #D4AF37 100%);
   }
   .gradient-hero {
     background: linear-gradient(150deg, #4A0010 0%, #8B0020 30%, #C04000 65%, #E05D00 100%);
@@ -201,7 +201,7 @@
 .pattern-rangoli {
   background-image:
     radial-gradient(circle, rgba(224, 93, 0, 0.11) 1.5px, transparent 1.5px),
-    radial-gradient(circle, rgba(184, 134, 11, 0.06) 1px, transparent 1px);
+    radial-gradient(circle, rgba(212, 175, 55, 0.06) 1px, transparent 1px);
   background-size: 28px 28px, 56px 56px;
   background-position: 0 0, 14px 14px;
 }
@@ -210,7 +210,7 @@
 .pattern-mandala {
   background-image:
     radial-gradient(ellipse 55% 80% at 5% 50%, rgba(224, 93, 0, 0.07) 0%, transparent 70%),
-    radial-gradient(ellipse 55% 80% at 95% 50%, rgba(184, 134, 11, 0.05) 0%, transparent 70%),
+    radial-gradient(ellipse 55% 80% at 95% 50%, rgba(212, 175, 55, 0.05) 0%, transparent 70%),
     radial-gradient(ellipse 80% 45% at 50% 5%, rgba(139, 0, 32, 0.04) 0%, transparent 70%),
     radial-gradient(ellipse 80% 45% at 50% 95%, rgba(224, 93, 0, 0.04) 0%, transparent 70%);
 }
@@ -220,8 +220,8 @@
   background-image:
     linear-gradient(rgba(224, 93, 0, 0.06) 1px, transparent 1px),
     linear-gradient(90deg, rgba(224, 93, 0, 0.06) 1px, transparent 1px),
-    linear-gradient(rgba(184, 134, 11, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(184, 134, 11, 0.03) 1px, transparent 1px);
+    linear-gradient(rgba(212, 175, 55, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(212, 175, 55, 0.03) 1px, transparent 1px);
   background-size: 40px 40px, 40px 40px, 8px 8px, 8px 8px;
 }
 

@@ -17,9 +17,14 @@ export default function PujasPage() {
   });
 
   return (
-    <div className="min-h-screen bg-cream pattern-rangoli">
+    <div className="min-h-screen relative">
+      {/* Ganesh background */}
+      <div className="fixed inset-0 -z-10">
+        <img src="/lord ganesh.jpg" alt="" className="w-full h-full object-cover object-top" />
+        <div className="absolute inset-0" style={{ background: 'rgba(255,255,255,0.50)' }} />
+      </div>
       <PageBanner
-        image="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=1600&q=85"
+        image="/lord ganesh.jpg"
         label="Sacred Rituals"
         title="Pujas & Ceremonies"
         subtitle="Explore our complete collection of sacred ceremonies — from daily havans to grand weddings, in your language and tradition."

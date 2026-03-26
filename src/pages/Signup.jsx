@@ -39,7 +39,9 @@ export default function Signup() {
       {/* Left decorative panel */}
       <div className="hidden lg:flex w-[45%] gradient-hero hero-pattern flex-col items-center justify-center p-12 relative overflow-hidden">
         <div className="text-center text-white max-w-xs">
-          <div className="text-6xl mb-6">🪔</div>
+          <div className="w-24 h-24 rounded-full overflow-hidden border-4 mx-auto mb-6 shadow-2xl" style={{ borderColor: '#FFD700' }}>
+            <img src="/lord ganesh.jpg" alt="Lord Ganesha" className="w-full h-full object-cover object-top" />
+          </div>
           <h2 className="text-3xl font-bold mb-3" style={{ fontFamily: 'Playfair Display, serif' }}>
             Join 45,000+<br />Happy Families
           </h2>

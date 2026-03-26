@@ -33,8 +33,8 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-1">
             <Link to="/" className="flex items-center gap-2.5 mb-4">
-              <div className="w-9 h-9 rounded-lg gradient-saffron flex items-center justify-center shadow-sm">
-                <span className="text-white text-lg leading-none">🪔</span>
+              <div className="w-9 h-9 rounded-full overflow-hidden border-2 shadow-sm" style={{ borderColor: '#E05D00' }}>
+                <img src="/lord ganesh.jpg" alt="Lord Ganesha" className="w-full h-full object-cover object-top" />
               </div>
               <span
                 className="text-lg font-bold text-white tracking-tight"

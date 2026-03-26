@@ -20,13 +20,19 @@ export default function PanditLogin() {
   };
 
   return (
-    <div className="min-h-screen bg-cream flex items-center justify-center py-12 px-4">
+    <div className="min-h-screen flex items-center justify-center py-12 px-4 relative">
+      <div className="fixed inset-0 -z-10">
+        <img src="/lord ganesh.jpg" alt="" className="w-full h-full object-cover object-top" />
+        <div className="absolute inset-0" style={{ background: 'rgba(255,255,255,0.55)' }} />
+      </div>
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <Link to="/" className="inline-flex items-center gap-2 mb-4">
-            <span className="text-3xl">🕉️</span>
-            <span className="text-2xl font-bold text-maroon" style={{ fontFamily: 'Playfair Display, serif' }}>
-              Pandit<span className="text-saffron">Connect</span>
+            <div className="w-10 h-10 rounded-full overflow-hidden border-2 shadow-sm" style={{ borderColor: '#E05D00' }}>
+              <img src="/lord ganesh.jpg" alt="Lord Ganesha" className="w-full h-full object-cover object-top" />
+            </div>
+            <span className="text-2xl font-bold text-maroon" style={{ fontFamily: 'Noto Serif, serif' }}>
+              Pandit<span className="text-saffron">Seva</span>
             </span>
           </Link>
           <h1 className="text-2xl font-bold text-gray-900">Pandit Login</h1>

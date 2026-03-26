@@ -21,9 +21,14 @@ const typeConfig = {
 
 export default function MuhuratPage() {
   return (
-    <div className="min-h-screen bg-cream pattern-mandala">
+    <div className="min-h-screen relative">
+      {/* Ganesh background */}
+      <div className="fixed inset-0 -z-10">
+        <img src="/lord ganesh.jpg" alt="" className="w-full h-full object-cover object-top" />
+        <div className="absolute inset-0" style={{ background: 'rgba(255,255,255,0.50)' }} />
+      </div>
       <PageBanner
-        image="https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=1600&q=80"
+        image="/lord ganesh.jpg"
         label="Auspicious Timing"
         title="Upcoming Muhurats"
         subtitle="Choose the most auspicious dates for your ceremonies. Our Vedic astrologers curate the best muhurats for each type of ritual."

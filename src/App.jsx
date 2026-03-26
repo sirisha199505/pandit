@@ -43,7 +43,7 @@ function GaneshBg({ src }) {
           width: '100%',
           height: '100%',
           objectFit: 'cover',
-          objectPosition: 'center',
+          objectPosition: 'center top',
           opacity: 0.10,
         }}
       />
@@ -68,7 +68,7 @@ function MainLayout({ children }) {
 function FullLayout({ children }) {
   return (
     <div className="min-h-screen relative">
-      <GaneshBg src="/ganesh1.jpg" />
+      <GaneshBg src="/lord ganesh.jpg" />
       <div className="relative z-10 min-h-screen">{children}</div>
     </div>
   );

@@ -67,7 +67,7 @@ export default function Search() {
   return (
     <div className="min-h-screen bg-cream">
       <PageBanner
-        image="https://images.unsplash.com/photo-1604999333679-b86d54738315?w=1600&q=85"
+        image="/lord ganesh.jpg"
         label="Verified Pandits"
         title="Find Your Pandit"
         subtitle="Discover trusted pandits near you — filtered by tradition, language and ceremony type."
@@ -78,7 +78,7 @@ export default function Search() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
         {/* ── Search bar ── */}
-        <div className="bg-white rounded-2xl p-4 shadow-card border border-stone-100 mb-6">
+        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-4 shadow-card border border-stone-100 mb-6">
           <div className="flex flex-col sm:flex-row gap-2.5">
             {/* Query */}
             <div className="flex items-center gap-2.5 flex-1 border border-stone-200 rounded-xl px-3.5 focus-within:border-orange-400 focus-within:shadow-input transition-all">
@@ -211,7 +211,7 @@ export default function Search() {
                 {filtered.map((p) => <PanditCard key={p.id} pandit={p} />)}
               </div>
             ) : (
-              <div className="text-center py-24 bg-white rounded-2xl border border-stone-100">
+              <div className="text-center py-24 bg-white/80 backdrop-blur-sm rounded-2xl border border-stone-100">
                 <div className="text-5xl mb-4">🔍</div>
                 <h3 className="font-semibold text-stone-800 mb-1">No pandits found</h3>
                 <p className="text-stone-400 text-sm">Try different search terms or adjust your filters.</p>
@@ -227,7 +227,7 @@ export default function Search() {
           {/* ── Sidebar ── */}
           <aside className="lg:w-60 shrink-0 space-y-4">
             {/* Popular Pujas */}
-            <div className="bg-white rounded-2xl p-5 border border-stone-100 shadow-card">
+            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-5 border border-stone-100 shadow-card">
               <h3 className="font-bold text-stone-900 text-sm mb-3">Popular Pujas</h3>
               <div className="space-y-1.5">
                 {['Satyanarayana Vratham', 'Griha Pravesh', 'Wedding', 'Ganesh Puja', 'Rudrabhishek'].map((p) => (

@@ -58,9 +58,11 @@ export default function PanditDashboard() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <Link to="/" className="flex items-center gap-2">
-              <span className="text-xl">🕉️</span>
-              <span className="font-bold text-maroon" style={{ fontFamily: 'Playfair Display, serif' }}>
-                Pandit<span className="text-saffron">Connect</span>
+              <div className="w-8 h-8 rounded-full overflow-hidden border-2 shadow-sm" style={{ borderColor: '#E05D00' }}>
+                <img src="/lord ganesh.jpg" alt="Lord Ganesha" className="w-full h-full object-cover object-top" />
+              </div>
+              <span className="font-bold text-maroon" style={{ fontFamily: 'Noto Serif, serif' }}>
+                Pandit<span className="text-saffron">Seva</span>
               </span>
             </Link>
             <div className="flex items-center gap-3">

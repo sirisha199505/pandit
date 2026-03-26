@@ -24,7 +24,9 @@ export default function AdminLogin() {
     <div className="min-h-screen bg-gray-900 flex items-center justify-center px-4">
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
-          <span className="text-4xl block mb-3">🪔</span>
+          <div className="w-16 h-16 rounded-full overflow-hidden border-2 mx-auto mb-3 shadow-lg" style={{ borderColor: '#E05D00' }}>
+            <img src="/lord ganesh.jpg" alt="Lord Ganesha" className="w-full h-full object-cover object-top" />
+          </div>
           <h1 className="text-2xl font-bold text-white">Admin Panel</h1>
           <p className="text-gray-400 text-sm mt-1">PanditSeva Management</p>
         </div>
