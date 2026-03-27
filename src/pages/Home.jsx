@@ -283,13 +283,8 @@ export default function Home() {
       </section>
 
       {/* ════════ HOW IT WORKS ════════ */}
-      <section className="relative py-14">
-        <div className="absolute inset-0 overflow-hidden">
-          <img src="/ganesh2.jpg" alt="" className="w-full h-full object-cover object-center" />
-          <div className="absolute inset-0" style={{ background: 'rgba(255,255,255,0.50)' }} />
-          <div className="absolute inset-0 pattern-mandala" />
-        </div>
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-14 bg-cream pattern-mandala">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             label="Simple Process"
             title="Book in 3 Easy Steps"
@@ -322,13 +317,8 @@ export default function Home() {
       </section>
 
       {/* ════════ FEATURED PANDITS ════════ */}
-      <section className="relative py-14">
-        <div className="absolute inset-0 overflow-hidden">
-          <img src="/ganesh3.jpg" alt="" className="w-full h-full object-cover object-center" />
-          <div className="absolute inset-0" style={{ background: 'rgba(255,255,255,0.50)' }} />
-          <div className="absolute inset-0 pattern-geometric" />
-        </div>
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-14 bg-white pattern-geometric">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-end justify-between mb-10">
             <SectionHeader label="Top Pandits" title="Verified & Trusted Pandits" center={false} />
             <Link
@@ -412,13 +402,8 @@ export default function Home() {
       </section>
 
       {/* ════════ TESTIMONIALS ════════ */}
-      <section className="relative py-14">
-        <div className="absolute inset-0 overflow-hidden">
-          <img src="/ganesh1.jpg" alt="" className="w-full h-full object-cover object-center" />
-          <div className="absolute inset-0" style={{ background: 'rgba(255,255,255,0.50)' }} />
-          <div className="absolute inset-0 pattern-rangoli" />
-        </div>
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-14 bg-cream pattern-rangoli">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             label="Testimonials"
             title="What Families Say"
