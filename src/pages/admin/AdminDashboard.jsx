@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { adminApi, bookingsApi } from '../../services/api';
 import {
   Users, BookOpen, DollarSign, TrendingUp, CheckCircle,
   XCircle, Clock, Eye, LogOut, BarChart3, Settings,
 } from 'lucide-react';
-import { pandits } from '../../data/mockData';
+import { panditsApi } from '../../services/api';
 import StarRating from '../../components/StarRating';
 
 const mockBookings = [
@@ -30,9 +31,22 @@ const statusConfig = {
 export default function AdminDashboard() {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('overview');
-  const [panditList, setPanditList] = useState(pandits);
+  const [panditList, setPanditList] = useState([]);
   const [pendingList, setPendingList] = useState(pendingPandits);
-  const [bookingList, setBookingList] = useState(mockBookings);
+  const [bookingList, setBookingList] = useState([]);
+  const [liveBookings, setLiveBookings] = useState([]);
+
+  useEffect(() => {
+    panditsApi.list({ page_size: 100 }).then((res) => {
+      if (res?.data?.length) setPanditList(res.data);
+    }).catch(() => {});
+    bookingsApi.adminList().then((res) => {
+      if (res?.data?.length) {
+        setLiveBookings(res.data);
+        setBookingList(res.data);
+      }
+    }).catch(() => {});
+  }, []);
 
   const approvePandit = (id) => {
     const newPandit = pendingList.find((p) => p.id === id);
@@ -51,8 +65,10 @@ export default function AdminDashboard() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-14">
             <div className="flex items-center gap-3">
-              <span className="text-xl">🪔</span>
-              <span className="font-bold" style={{ fontFamily: 'Playfair Display, serif' }}>
+              <div className="w-8 h-8 rounded-full overflow-hidden border-2" style={{ borderColor: '#E05D00' }}>
+                <img src="/lord ganesh.jpg" alt="Logo" className="w-full h-full object-cover object-top" />
+              </div>
+              <span className="font-bold" style={{ fontFamily: 'Noto Serif, serif' }}>
                 PanditSeva <span className="text-orange-400 text-sm font-normal">Admin</span>
               </span>
             </div>
@@ -138,18 +154,24 @@ export default function AdminDashboard() {
 
                 {/* Recent Bookings */}
                 <div>
-                  <h3 className="font-bold text-gray-900 mb-4">Recent Bookings</h3>
+                  <h3 className="font-bold text-gray-900 mb-4">
+                    Recent Bookings
+                    {liveBookings.length > 0 && <span className="ml-2 text-xs text-green-600 font-normal">● Live</span>}
+                  </h3>
                   <div className="space-y-2">
-                    {bookingList.slice(0, 4).map((b) => {
+                    {(liveBookings.length > 0 ? liveBookings : bookingList).slice(0, 5).map((b) => {
                       const s = statusConfig[b.status] || statusConfig.pending;
+                      const isLive = liveBookings.length > 0;
                       return (
                         <div key={b.id} className="flex items-center justify-between flex-wrap gap-2 p-3 bg-gray-50 rounded-xl">
                           <div>
-                            <p className="text-sm font-medium text-gray-800">{b.puja}</p>
-                            <p className="text-xs text-gray-500">{b.user} → {b.pandit} · {b.city} · {b.date}</p>
+                            <p className="text-sm font-medium text-gray-800">{isLive ? b.puja_name : b.puja}</p>
+                            <p className="text-xs text-gray-500">
+                              {isLive ? `${b.pandit_name || 'Pandit'} · ${b.city || '—'} · ${b.date}` : `${b.user} → ${b.pandit} · ${b.city} · ${b.date}`}
+                            </p>
                           </div>
                           <div className="flex items-center gap-2">
-                            <span className="font-semibold text-sm text-saffron">₹{b.amount.toLocaleString()}</span>
+                            <span className="font-semibold text-sm text-saffron">₹{Number(isLive ? b.amount : b.amount).toLocaleString()}</span>
                             <span className={`flex items-center gap-1 text-xs px-2 py-0.5 rounded-full ${s.color}`}>
                               {s.icon} {b.status}
                             </span>
@@ -189,9 +211,9 @@ export default function AdminDashboard() {
                               </div>
                             </div>
                           </td>
-                          <td className="py-3 pr-4 text-gray-500 text-xs">{p.location || 'N/A'}</td>
+                          <td className="py-3 pr-4 text-gray-500 text-xs">{p.city || p.location || 'N/A'}</td>
                           <td className="py-3 pr-4">{p.rating ? <StarRating rating={p.rating} size={11} /> : <span className="text-xs text-gray-400">New</span>}</td>
-                          <td className="py-3 pr-4 text-gray-600">{p.completedPujas || 0}</td>
+                          <td className="py-3 pr-4 text-gray-600">{p.completed_pujas || p.completedPujas || 0}</td>
                           <td className="py-3 pr-4">
                             <span className={`text-xs px-2 py-0.5 rounded-full ${p.verified ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'}`}>
                               {p.verified ? 'Verified' : 'Unverified'}
@@ -231,12 +253,12 @@ export default function AdminDashboard() {
                         const s = statusConfig[b.status] || statusConfig.pending;
                         return (
                           <tr key={b.id} className="border-b border-gray-50 hover:bg-orange-50/30">
-                            <td className="py-3 pr-3 font-mono text-xs text-gray-400">{b.id}</td>
-                            <td className="py-3 pr-3 font-medium text-xs">{b.puja}</td>
-                            <td className="py-3 pr-3 text-xs text-gray-600">{b.user}</td>
-                            <td className="py-3 pr-3 text-xs text-gray-600">{b.pandit}</td>
+                            <td className="py-3 pr-3 font-mono text-xs text-gray-400">{b.booking_ref || b.id}</td>
+                            <td className="py-3 pr-3 font-medium text-xs">{b.puja_name || b.puja}</td>
+                            <td className="py-3 pr-3 text-xs text-gray-600">{b.user_name || b.user || '—'}</td>
+                            <td className="py-3 pr-3 text-xs text-gray-600">{b.pandit_name || b.pandit || '—'}</td>
                             <td className="py-3 pr-3 text-xs text-gray-500">{b.date}</td>
-                            <td className="py-3 pr-3 font-semibold text-saffron text-xs">₹{b.amount.toLocaleString()}</td>
+                            <td className="py-3 pr-3 font-semibold text-saffron text-xs">₹{Number(b.amount || 0).toLocaleString()}</td>
                             <td className="py-3">
                               <span className={`flex items-center gap-1 text-xs px-2 py-0.5 rounded-full w-fit ${s.color}`}>
                                 {s.icon} {b.status}

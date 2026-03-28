@@ -4,17 +4,21 @@ import { ModalProvider } from './context/ModalContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import AuthModal from './components/AuthModal';
+import BackToTop from './components/BackToTop';
 
 // Pages
-import Home           from './pages/Home';
-import Search         from './pages/Search';
-import PanditProfile  from './pages/PanditProfile';
-import BookingPage    from './pages/BookingPage';
-import PujasPage      from './pages/PujasPage';
-import MuhuratPage    from './pages/MuhuratPage';
-import UserDashboard  from './pages/UserDashboard';
-import Login          from './pages/Login';
-import Signup         from './pages/Signup';
+import Home               from './pages/Home';
+import Search             from './pages/Search';
+import PanditProfile      from './pages/PanditProfile';
+import BookingPage        from './pages/BookingPage';
+import BookingConfirmation from './pages/BookingConfirmation';
+import PujasPage          from './pages/PujasPage';
+import MuhuratPage        from './pages/MuhuratPage';
+import UserDashboard      from './pages/UserDashboard';
+import Login              from './pages/Login';
+import Signup             from './pages/Signup';
+import ForgotPassword     from './pages/ForgotPassword';
+import NotFound           from './pages/NotFound';
 
 // Pandit pages
 import PanditLogin    from './pages/pandit/PanditLogin';
@@ -60,6 +64,7 @@ function MainLayout({ children }) {
         <main className="flex-1">{children}</main>
         <Footer />
         <AuthModal />
+        <BackToTop />
       </div>
     </div>
   );
@@ -98,9 +103,13 @@ export default function App() {
             <Route path="/muhurat"  element={<MainLayout><MuhuratPage   /></MainLayout>} />
             <Route path="/dashboard" element={<MainLayout><UserDashboard /></MainLayout>} />
 
-            {/* Auth — kept as pages for direct URL fallback */}
-            <Route path="/login"    element={<FullLayout><Login   /></FullLayout>} />
-            <Route path="/signup"   element={<FullLayout><Signup  /></FullLayout>} />
+            {/* Booking confirmation */}
+            <Route path="/booking/confirmation" element={<FullLayout><BookingConfirmation /></FullLayout>} />
+
+            {/* Auth */}
+            <Route path="/login"           element={<FullLayout><Login          /></FullLayout>} />
+            <Route path="/signup"          element={<FullLayout><Signup         /></FullLayout>} />
+            <Route path="/forgot-password" element={<FullLayout><ForgotPassword /></FullLayout>} />
 
             {/* Pandit */}
             <Route path="/pandit/login"      element={<FullLayout><PanditLogin    /></FullLayout>} />
@@ -110,6 +119,9 @@ export default function App() {
             {/* Admin */}
             <Route path="/admin"             element={<FullLayout><AdminLogin     /></FullLayout>} />
             <Route path="/admin/dashboard"   element={<DashLayout><AdminDashboard /></DashLayout>} />
+
+            {/* 404 */}
+            <Route path="*" element={<MainLayout><NotFound /></MainLayout>} />
           </Routes>
         </Router>
       </ModalProvider>

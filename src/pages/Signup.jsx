@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Eye, EyeOff, Mail, Lock, User, Phone, ArrowLeft } from 'lucide-react';
 import { useApp } from '../context/AppContext';
+import { authApi } from '../services/api';
 
 export default function Signup() {
   const { login } = useApp();
@@ -20,9 +21,18 @@ export default function Signup() {
     if (form.password !== form.confirm) { setError("Passwords don't match."); return; }
     if (form.password.length < 6)       { setError('Password must be at least 6 characters.'); return; }
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 800));
-    login({ name: form.name, email: form.email, phone: form.phone });
-    navigate('/dashboard');
+    try {
+      await authApi.register({
+        full_name:    form.name,
+        email:        form.email,
+        password:     form.password,
+        phone_number: form.phone,
+      });
+      await login(form.email, form.password);
+      navigate('/dashboard');
+    } catch (err) {
+      setError(err.message || 'Registration failed. Please try again.');
+    }
     setLoading(false);
   };
 

@@ -42,7 +42,7 @@ export default function PanditCard({ pandit }) {
               </h3>
               <div className="text-right shrink-0 ml-2">
                 <p className="text-saffron font-bold text-sm leading-none">
-                  ₹{pandit.pricePerPuja.toLocaleString()}
+                  ₹{(pandit.price_per_puja || pandit.pricePerPuja || 0).toLocaleString()}
                 </p>
                 <p className="text-[10px] text-stone-400 mt-0.5">per puja</p>
               </div>
@@ -66,7 +66,7 @@ export default function PanditCard({ pandit }) {
         {/* Location */}
         <div className="flex items-center gap-1 mt-2.5 text-[11px] text-stone-500">
           <MapPin size={10} className="text-orange-400 shrink-0" />
-          <span className="truncate">{pandit.location}</span>
+          <span className="truncate">{pandit.city || pandit.location}</span>
         </div>
 
         {/* Divider + meta */}
@@ -87,7 +87,7 @@ export default function PanditCard({ pandit }) {
           <div className="flex items-center justify-between text-[11px] text-stone-500">
             <span className="flex items-center gap-1">
               <Zap size={10} className="text-emerald-500" />
-              {pandit.responseTime}
+              {pandit.response_time || pandit.responseTime}
             </span>
             <span className="flex items-center gap-1">
               <Clock size={10} className="text-stone-400" />

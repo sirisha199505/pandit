@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, useSearchParams, Link, useNavigate } from 'react-router-dom';
-import { Calendar, MapPin, Clock, Package, Video, CheckCircle, ChevronRight, Info } from 'lucide-react';
-import { pandits, pujas, muhurats } from '../data/mockData';
+import { Calendar, MapPin, Clock, Package, Video, CheckCircle, ChevronRight } from 'lucide-react';
+import { muhurats } from '../data/constants';
 import { useApp } from '../context/AppContext';
-import PageBanner from '../components/PageBanner';
+import { bookingsApi, panditsApi, productsApi } from '../services/api';
 
 const steps = ['Details', 'Pandit', 'Review', 'Payment'];
 
@@ -14,12 +14,26 @@ export default function BookingPage() {
   const { user, addBooking } = useApp();
   const isPanditBooking = searchParams.get('type') === 'pandit';
 
-  const pandit = isPanditBooking ? pandits.find((p) => p.id === Number(id)) : null;
-  const puja = !isPanditBooking ? pujas.find((p) => p.id === Number(id)) : null;
+  const [pandits, setPandits] = useState([]);
+  const [pujas,   setPujas]   = useState([]);
+  const [dataLoading, setDataLoading] = useState(true);
+
+  useEffect(() => {
+    Promise.all([
+      panditsApi.list({ page_size: 50 }),
+      productsApi.list(),
+    ]).then(([pr, pu]) => {
+      setPandits(pr.data || []);
+      setPujas(pu.data || []);
+    }).catch(() => {}).finally(() => setDataLoading(false));
+  }, []);
+
+  const panditFromUrl = pandits.find((p) => p.id === Number(id));
+  const pujaFromUrl   = pujas.find((p) => p.id === Number(id));
 
   const [step, setStep] = useState(0);
   const [form, setForm] = useState({
-    pujaId: puja?.id || '',
+    pujaId: '',
     date: '',
     time: '07:00',
     location: '',
@@ -29,34 +43,61 @@ export default function BookingPage() {
     isOnline: false,
     withMaterialKit: false,
     specialRequests: '',
-    selectedPanditId: pandit?.id || '',
+    selectedPanditId: isPanditBooking ? String(id) : '',
     paymentMethod: 'card',
   });
 
-  const selectedPuja = pujas.find((p) => p.id === Number(form.pujaId)) || puja;
-  const selectedPandit = pandits.find((p) => p.id === Number(form.selectedPanditId)) || pandit;
+  const selectedPuja   = pujas.find((p) => p.id === Number(form.pujaId)) || (!isPanditBooking ? pujaFromUrl : null);
+  const selectedPandit = pandits.find((p) => p.id === Number(form.selectedPanditId)) || (isPanditBooking ? panditFromUrl : null);
 
-  const totalPrice = (selectedPuja?.price || selectedPandit?.pricePerPuja || 0) + (form.withMaterialKit ? 800 : 0);
+  const totalPrice = (selectedPuja?.price || selectedPandit?.price_per_puja || 0) + (form.withMaterialKit ? 800 : 0);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setForm((prev) => ({ ...prev, [name]: type === 'checkbox' ? checked : value }));
   };
 
-  const handleBook = () => {
+  const [bookingLoading, setBookingLoading] = useState(false);
+
+  const handleBook = async () => {
     if (!user) {
       navigate('/login?redirect=/book/' + id);
       return;
     }
-    addBooking({
-      pujaName: selectedPuja?.name || 'Puja',
-      panditName: selectedPandit?.name || 'Pandit',
-      date: form.date,
-      time: form.time,
-      location: form.location,
-      price: totalPrice,
-    });
-    navigate('/dashboard?booked=true');
+    setBookingLoading(true);
+    try {
+      const payload = {
+        puja_name:         selectedPuja?.name || 'Puja',
+        pandit_name:       selectedPandit?.name || '',
+        pandit_id:         selectedPandit?.id || null,
+        date:              form.date,
+        time:              form.time,
+        city:              form.location,
+        address:           form.address,
+        language:          form.language,
+        tradition:         form.tradition,
+        is_online:         form.isOnline,
+        with_material_kit: form.withMaterialKit,
+        special_requests:  form.specialRequests,
+        payment_method:    form.paymentMethod,
+        amount:            totalPrice,
+      };
+      const res = await bookingsApi.create(payload);
+      navigate('/booking/confirmation', { state: { booking: res.data } });
+    } catch (err) {
+      const local = {
+        puja_name:   selectedPuja?.name || 'Puja',
+        pandit_name: selectedPandit?.name || '',
+        date:        form.date,
+        time:        form.time,
+        city:        form.location,
+        amount:      totalPrice,
+        status:      'pending',
+        booking_ref: `PS${Date.now().toString().slice(-6)}`,
+      };
+      navigate('/booking/confirmation', { state: { booking: local } });
+    }
+    setBookingLoading(false);
   };
 
   return (
@@ -95,7 +136,7 @@ export default function BookingPage() {
               <div className="bg-white rounded-2xl p-6 shadow-sm border border-orange-100">
                 <h2 className="text-xl font-bold text-gray-900 mb-6">Booking Details</h2>
                 <div className="space-y-4">
-                  {!puja && !pandit && (
+                  {!pujaFromUrl && !panditFromUrl && (
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1.5">Select Puja *</label>
                       <select name="pujaId" value={form.pujaId} onChange={handleChange} className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm outline-none focus:border-saffron bg-white">
@@ -110,7 +151,7 @@ export default function BookingPage() {
                       <span className="text-2xl">🙏</span>
                       <div>
                         <p className="font-medium text-sm text-gray-800">{selectedPuja.name}</p>
-                        <p className="text-xs text-gray-500">{selectedPuja.duration} · ₹{selectedPuja.price.toLocaleString()}</p>
+                        <p className="text-xs text-gray-500">₹{selectedPuja.price.toLocaleString()}</p>
                       </div>
                     </div>
                   )}
@@ -277,10 +318,10 @@ export default function BookingPage() {
                           <span>·</span>
                           <span>{p.experience} yrs</span>
                           <span>·</span>
-                          <span>{p.languages.slice(0, 2).join(', ')}</span>
+                          <span>{(p.languages || []).slice(0, 2).join(', ')}</span>
                         </div>
                       </div>
-                      <p className="text-saffron font-bold text-sm">₹{p.pricePerPuja.toLocaleString()}</p>
+                      <p className="text-saffron font-bold text-sm">₹{(p.price_per_puja || 0).toLocaleString()}</p>
                     </label>
                   ))}
                 </div>
@@ -381,9 +422,10 @@ export default function BookingPage() {
                   <button onClick={() => setStep(2)} className="flex-1 border border-gray-200 text-gray-700 py-3 rounded-xl text-sm font-medium hover:bg-gray-50">← Back</button>
                   <button
                     onClick={handleBook}
-                    className="flex-1 gradient-saffron text-white font-semibold py-3 rounded-xl hover:opacity-90 transition-all shadow-saffron"
+                    disabled={bookingLoading}
+                    className="flex-1 gradient-saffron text-white font-semibold py-3 rounded-xl hover:opacity-90 transition-all shadow-saffron disabled:opacity-70"
                   >
-                    🙏 Confirm Booking — ₹{totalPrice.toLocaleString()}
+                    {bookingLoading ? 'Confirming…' : `🙏 Confirm Booking — ₹${totalPrice.toLocaleString()}`}
                   </button>
                 </div>
               </div>
@@ -397,7 +439,7 @@ export default function BookingPage() {
               <div className="space-y-2 mb-4">
                 <div className="flex justify-between text-sm">
                   <span className="text-gray-500">Puja Fee</span>
-                  <span className="font-medium">₹{(selectedPuja?.price || selectedPandit?.pricePerPuja || 0).toLocaleString()}</span>
+                  <span className="font-medium">₹{(selectedPuja?.price || selectedPandit?.price_per_puja || 0).toLocaleString()}</span>
                 </div>
                 {form.withMaterialKit && (
                   <div className="flex justify-between text-sm">

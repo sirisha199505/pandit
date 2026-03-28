@@ -1,12 +1,22 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Search } from 'lucide-react';
-import { pujas, categories } from '../data/mockData';
+import { productsApi } from '../services/api';
+import { categories } from '../data/constants';
 import PujaCard from '../components/PujaCard';
 import PageBanner from '../components/PageBanner';
+import { PujaCardSkeleton } from '../components/LoadingSkeleton';
 
 export default function PujasPage() {
   const [search, setSearch]               = useState('');
   const [activeCategory, setActiveCategory] = useState('All');
+  const [pujas, setPujas]                 = useState([]);
+  const [loading, setLoading]             = useState(true);
+
+  useEffect(() => {
+    productsApi.list().then((res) => {
+      setPujas(res.data || []);
+    }).catch(() => {}).finally(() => setLoading(false));
+  }, []);
 
   const filtered = pujas.filter((p) => {
     const matchSearch = !search ||
@@ -76,11 +86,17 @@ export default function PujasPage() {
         </div>
 
         {/* Results count */}
-        <p className="text-xs text-stone-400 mb-5 text-center">
-          Showing <span className="font-semibold text-stone-700">{filtered.length}</span> ceremonies
-        </p>
+        {!loading && (
+          <p className="text-xs text-stone-400 mb-5 text-center">
+            Showing <span className="font-semibold text-stone-700">{filtered.length}</span> ceremonies
+          </p>
+        )}
 
-        {filtered.length > 0 ? (
+        {loading ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {Array.from({ length: 8 }).map((_, i) => <PujaCardSkeleton key={i} />)}
+          </div>
+        ) : filtered.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {filtered.map((puja) => <PujaCard key={puja.id} puja={puja} />)}
           </div>

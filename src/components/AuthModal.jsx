@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { X, Mail, Lock, Eye, EyeOff, User, Phone, CheckCircle } from 'lucide-react';
 import { useModal } from '../context/ModalContext';
 import { useApp } from '../context/AppContext';
+import { authApi } from '../services/api';
 
 /* ─── Backdrop + container ─── */
 function ModalShell({ children, onClose }) {
@@ -94,13 +95,12 @@ function LoginPanel({ switchTo }) {
     e.preventDefault();
     setError('');
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 700));
-    if (form.email && form.password) {
-      login({ name: form.email.split('@')[0].replace(/[._]/g, ' '), email: form.email });
+    try {
+      await login(form.email, form.password);
       closeModal();
       navigate(redirect);
-    } else {
-      setError('Please enter your email and password.');
+    } catch (err) {
+      setError(err.message || 'Invalid email or password.');
     }
     setLoading(false);
   };
@@ -207,10 +207,19 @@ function SignupPanel({ switchTo }) {
     if (form.password !== form.confirm)    { setError("Passwords don't match."); return; }
     if (form.password.length < 6)          { setError('Password must be at least 6 characters.'); return; }
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 800));
-    login({ name: form.name, email: form.email, phone: form.phone });
-    closeModal();
-    navigate('/dashboard');
+    try {
+      await authApi.register({
+        full_name:    form.name,
+        email:        form.email,
+        password:     form.password,
+        phone_number: form.phone,
+      });
+      await login(form.email, form.password);
+      closeModal();
+      navigate('/dashboard');
+    } catch (err) {
+      setError(err.message || 'Registration failed. Please try again.');
+    }
     setLoading(false);
   };
 

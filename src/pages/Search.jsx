@@ -1,9 +1,10 @@
-import { useState, useMemo } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { Search as SearchIcon, MapPin, SlidersHorizontal, X, ArrowRight } from 'lucide-react';
-import { pandits } from '../data/mockData';
+import { panditsApi } from '../services/api';
 import PanditCard from '../components/PanditCard';
 import PageBanner from '../components/PageBanner';
+import { PanditCardSkeleton } from '../components/LoadingSkeleton';
 
 const traditions = ['All', 'Telugu', 'Tamil', 'North Indian', 'Maharashtrian', 'Kannada', 'Malayali'];
 const languages  = ['All', 'Telugu', 'Tamil', 'Hindi', 'Sanskrit', 'Kannada', 'Marathi', 'Malayalam'];
@@ -34,6 +35,14 @@ export default function Search() {
   const [showFilters, setShowFilters] = useState(false);
   const [priceMax,    setPriceMax]    = useState(20000);
   const [onlyAvail,   setOnlyAvail]   = useState(false);
+  const [allPandits,  setAllPandits]  = useState([]);
+  const [loading,     setLoading]     = useState(true);
+
+  useEffect(() => {
+    panditsApi.list({ page_size: 100 }).then((res) => {
+      setAllPandits(res.data || []);
+    }).catch(() => {}).finally(() => setLoading(false));
+  }, []);
 
   const clearAll = () => {
     setQuery(''); setLocation(''); setTradition('All');
@@ -43,26 +52,26 @@ export default function Search() {
   const hasFilters = tradition !== 'All' || language !== 'All' || priceMax < 20000 || onlyAvail;
 
   const filtered = useMemo(() => {
-    let r = [...pandits];
+    let r = [...allPandits];
     if (query) {
       const q = query.toLowerCase();
       r = r.filter((p) =>
-        p.name.toLowerCase().includes(q) ||
-        p.specializations.some((s) => s.toLowerCase().includes(q)) ||
-        p.traditions.some((t) => t.toLowerCase().includes(q))
+        p.name?.toLowerCase().includes(q) ||
+        p.specializations?.some((s) => s.toLowerCase().includes(q)) ||
+        p.traditions?.some((t) => t.toLowerCase().includes(q))
       );
     }
-    if (location) r = r.filter((p) => p.location.toLowerCase().includes(location.toLowerCase()));
-    if (tradition !== 'All') r = r.filter((p) => p.traditions.some((t) => t.toLowerCase().includes(tradition.toLowerCase())));
-    if (language  !== 'All') r = r.filter((p) => p.languages.some((l)  => l.toLowerCase().includes(language.toLowerCase())));
+    if (location) r = r.filter((p) => p.city?.toLowerCase().includes(location.toLowerCase()));
+    if (tradition !== 'All') r = r.filter((p) => p.traditions?.some((t) => t.toLowerCase().includes(tradition.toLowerCase())));
+    if (language  !== 'All') r = r.filter((p) => p.languages?.some((l)  => l.toLowerCase().includes(language.toLowerCase())));
     if (onlyAvail) r = r.filter((p) => p.available);
-    r = r.filter((p) => p.pricePerPuja <= priceMax);
-    if (sortBy === 'Rating: High to Low')   r.sort((a, b) => b.rating - a.rating);
-    else if (sortBy === 'Price: Low to High')  r.sort((a, b) => a.pricePerPuja - b.pricePerPuja);
-    else if (sortBy === 'Price: High to Low')  r.sort((a, b) => b.pricePerPuja - a.pricePerPuja);
-    else if (sortBy === 'Experience')          r.sort((a, b) => b.experience - a.experience);
+    r = r.filter((p) => (p.price_per_puja || 0) <= priceMax);
+    if (sortBy === 'Rating: High to Low')  r.sort((a, b) => b.rating - a.rating);
+    else if (sortBy === 'Price: Low to High') r.sort((a, b) => a.price_per_puja - b.price_per_puja);
+    else if (sortBy === 'Price: High to Low') r.sort((a, b) => b.price_per_puja - a.price_per_puja);
+    else if (sortBy === 'Experience')         r.sort((a, b) => b.experience - a.experience);
     return r;
-  }, [query, location, tradition, language, sortBy, priceMax, onlyAvail]);
+  }, [allPandits, query, location, tradition, language, sortBy, priceMax, onlyAvail]);
 
   return (
     <div className="min-h-screen bg-cream">

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { CheckCircle } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
+import { authApi } from '../../services/api';
 
 const steps = ['Personal Info', 'Professional', 'Documents', 'Done'];
 
@@ -31,7 +32,25 @@ export default function PanditRegister() {
     }));
   };
 
+  const [regError, setRegError] = useState('');
+
   const handleSubmit = async () => {
+    setRegError('');
+    try {
+      await authApi.panditRegister({
+        full_name:       form.name,
+        email:           form.email,
+        password:        form.password,
+        phone_number:    form.phone,
+        city:            form.city,
+        experience:      form.experience,
+        languages:       form.languages.join(', '),
+        specializations: form.specializations.join(', '),
+      });
+    } catch (err) {
+      setRegError(err.message || 'Registration failed. Please try again.');
+      return;
+    }
     setSubmitted(true);
   };
 

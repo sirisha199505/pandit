@@ -1,0 +1,20 @@
+{
+  "name": "PanditSeva - Book Pandits Online",
+  "short_name": "PanditSeva",
+  "description": "Book verified pandits for every sacred ritual — weddings, pujas & ceremonies.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFFDF5",
+  "theme_color": "#E05D00",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["lifestyle", "utilities"],
+  "lang": "en-IN"
+}

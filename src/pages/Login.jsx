@@ -19,12 +19,11 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true); setError('');
-    await new Promise((r) => setTimeout(r, 700));
-    if (form.email && form.password) {
-      login({ name: form.email.split('@')[0].replace(/[._]/g, ' '), email: form.email });
+    try {
+      await login(form.email, form.password);
       navigate(redirect);
-    } else {
-      setError('Please enter valid credentials.');
+    } catch (err) {
+      setError(err.message || 'Invalid email or password.');
     }
     setLoading(false);
   };
@@ -86,7 +85,7 @@ export default function Login() {
               <div>
                 <div className="flex items-center justify-between mb-1.5">
                   <label className="text-xs font-semibold text-stone-600 uppercase tracking-wide">Password</label>
-                  <a href="#" className="text-xs text-saffron hover:underline font-medium">Forgot?</a>
+                  <Link to="/forgot-password" className="text-xs text-saffron hover:underline font-medium">Forgot?</Link>
                 </div>
                 <div className="relative">
                   <Lock size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-stone-400" />

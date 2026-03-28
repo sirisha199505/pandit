@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Calendar, Star, ArrowRight } from 'lucide-react';
-import { muhurats } from '../data/mockData';
+import { muhurats } from '../data/constants';
 import PageBanner from '../components/PageBanner';
 
 const allMuhurats = [

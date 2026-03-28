@@ -1,24 +1,41 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import {
   MapPin, Clock, CheckCircle, Star, Zap, Phone, MessageCircle,
   Video, Package, ChevronRight, Award, Users, Calendar,
 } from 'lucide-react';
-import { pandits, pujas } from '../data/mockData';
+import { panditsApi } from '../services/api';
 import StarRating from '../components/StarRating';
 import PageBanner from '../components/PageBanner';
-
-const mockReviews = [
-  { id: 1, name: 'Sunita Devi', rating: 5, date: 'March 2025', puja: 'Griha Pravesh', text: 'Excellent pandit, very knowledgeable and punctual. Explained every ritual in our language.' },
-  { id: 2, name: 'Ravi Kumar', rating: 5, date: 'Feb 2025', puja: 'Satyanarayana Puja', text: 'Very authentic and professional. Will book again for sure!' },
-  { id: 3, name: 'Meena Reddy', rating: 4, date: 'Jan 2025', puja: 'Wedding', text: 'Our wedding ceremony was performed beautifully. Pandit ji was calm and composed.' },
-];
 
 export default function PanditProfile() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('about');
-  const pandit = pandits.find((p) => p.id === Number(id));
+  const [pandit, setPandit] = useState(null);
+  const [reviews, setReviews] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    Promise.all([
+      panditsApi.get(id),
+      panditsApi.reviews(id),
+    ]).then(([pr, rv]) => {
+      setPandit(pr.data);
+      setReviews(rv.data || []);
+    }).catch(() => {}).finally(() => setLoading(false));
+  }, [id]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-cream flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-orange-200 border-t-saffron rounded-full animate-spin mx-auto mb-4" />
+          <p className="text-stone-500 text-sm">Loading profile…</p>
+        </div>
+      </div>
+    );
+  }
 
   if (!pandit) {
     return (
@@ -46,7 +63,7 @@ export default function PanditProfile() {
         image="https://images.unsplash.com/photo-1594381898411-846e7d193883?w=1600&q=80"
         label="Pandit Profile"
         title={pandit.name}
-        subtitle={`${pandit.experience} years experience · ${pandit.traditions.join(', ')} tradition`}
+        subtitle={`${pandit.experience} years experience · ${(pandit.traditions || []).join(', ')} tradition`}
         breadcrumb={[{ label: 'Find Pandits', to: '/search' }, { label: pandit.name }]}
         align="left"
         height="h-52 md:h-64"
@@ -90,7 +107,7 @@ export default function PanditProfile() {
                       </div>
                     </div>
                     <div className="text-right">
-                      <p className="text-2xl font-bold text-saffron">₹{pandit.pricePerPuja.toLocaleString()}</p>
+                      <p className="text-2xl font-bold text-saffron">₹{(pandit.price_per_puja || 0).toLocaleString()}</p>
                       <p className="text-xs text-gray-400">starting per puja</p>
                     </div>
                   </div>
@@ -100,12 +117,12 @@ export default function PanditProfile() {
                     <span className="text-xs text-gray-400">·</span>
                     <div className="flex items-center gap-1 text-xs text-gray-500">
                       <MapPin size={11} className="text-orange-400" />
-                      {pandit.location}
+                      {pandit.city}
                     </div>
                     <span className="text-xs text-gray-400">·</span>
                     <div className="flex items-center gap-1 text-xs text-gray-500">
                       <Zap size={11} className="text-green-500" />
-                      {pandit.responseTime} response
+                      {pandit.response_time} response
                     </div>
                   </div>
                 </div>
@@ -115,8 +132,8 @@ export default function PanditProfile() {
               <div className="grid grid-cols-3 gap-3 mt-5 pt-5 border-t border-orange-50">
                 {[
                   { label: 'Experience', value: `${pandit.experience} Years`, icon: <Award size={16} className="text-saffron" /> },
-                  { label: 'Pujas Done', value: pandit.completedPujas.toLocaleString(), icon: <Users size={16} className="text-saffron" /> },
-                  { label: 'Happy Families', value: `${pandit.reviews}+`, icon: <Star size={16} className="text-saffron" /> },
+                  { label: 'Pujas Done', value: (pandit.completed_pujas || 0).toLocaleString(), icon: <Users size={16} className="text-saffron" /> },
+                  { label: 'Happy Families', value: `${pandit.reviews || 0}+`, icon: <Star size={16} className="text-saffron" /> },
                 ].map((stat) => (
                   <div key={stat.label} className="text-center p-3 bg-orange-50 rounded-xl">
                     <div className="flex justify-center mb-1">{stat.icon}</div>
@@ -150,12 +167,12 @@ export default function PanditProfile() {
                   <div className="space-y-4">
                     <div>
                       <h3 className="font-bold text-gray-900 mb-2">About</h3>
-                      <p className="text-sm text-gray-600 leading-relaxed">{pandit.bio}</p>
+                      <p className="text-sm text-gray-600 leading-relaxed">{pandit.bio || 'Experienced Vedic pandit available for all ceremonies.'}</p>
                     </div>
                     <div>
                       <h3 className="font-bold text-gray-900 mb-2">Languages</h3>
                       <div className="flex flex-wrap gap-2">
-                        {pandit.languages.map((l) => (
+                        {(pandit.languages || []).map((l) => (
                           <span key={l} className="text-sm bg-amber-50 text-amber-700 px-3 py-1 rounded-full border border-amber-100">
                             🗣️ {l}
                           </span>
@@ -165,7 +182,7 @@ export default function PanditProfile() {
                     <div>
                       <h3 className="font-bold text-gray-900 mb-2">Traditions</h3>
                       <div className="flex flex-wrap gap-2">
-                        {pandit.traditions.map((t) => (
+                        {(pandit.traditions || []).map((t) => (
                           <span key={t} className="text-sm bg-orange-50 text-orange-700 px-3 py-1 rounded-full border border-orange-100">
                             🛕 {t}
                           </span>
@@ -179,12 +196,12 @@ export default function PanditProfile() {
                   <div>
                     <h3 className="font-bold text-gray-900 mb-4">Specializations</h3>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      {pandit.specializations.map((s) => (
+                      {(pandit.specializations || []).map((s) => (
                         <div key={s} className="flex items-center gap-2 p-3 bg-orange-50 rounded-xl">
                           <span className="text-xl">🙏</span>
                           <div>
                             <p className="text-sm font-medium text-gray-800">{s}</p>
-                            <p className="text-xs text-gray-500">Starting ₹{pandit.pricePerPuja.toLocaleString()}</p>
+                            <p className="text-xs text-gray-500">Starting ₹{(pandit.price_per_puja || 0).toLocaleString()}</p>
                           </div>
                         </div>
                       ))}
@@ -214,16 +231,19 @@ export default function PanditProfile() {
                         ))}
                       </div>
                     </div>
-                    {mockReviews.map((review) => (
+                    {reviews.length === 0 && (
+                      <p className="text-sm text-gray-500 text-center py-4">No reviews yet. Be the first to review!</p>
+                    )}
+                    {reviews.map((review) => (
                       <div key={review.id} className="border-b border-gray-100 pb-4 last:border-0 last:pb-0">
                         <div className="flex items-start justify-between mb-2">
                           <div>
-                            <p className="font-medium text-gray-800 text-sm">{review.name}</p>
-                            <p className="text-xs text-gray-400">{review.puja} · {review.date}</p>
+                            <p className="font-medium text-gray-800 text-sm">{review.reviewer_name || review.name}</p>
+                            <p className="text-xs text-gray-400">{review.created_at ? new Date(review.created_at).toLocaleDateString('en-IN', { month: 'short', year: 'numeric' }) : ''}</p>
                           </div>
                           <StarRating rating={review.rating} size={12} />
                         </div>
-                        <p className="text-sm text-gray-600">{review.text}</p>
+                        <p className="text-sm text-gray-600">{review.comment}</p>
                       </div>
                     ))}
                   </div>
@@ -257,7 +277,7 @@ export default function PanditProfile() {
 
               <div className="bg-orange-50 rounded-xl p-3 mb-5">
                 <p className="text-xs text-gray-500 mb-1">Starting from</p>
-                <p className="text-2xl font-bold text-saffron">₹{pandit.pricePerPuja.toLocaleString()}</p>
+                <p className="text-2xl font-bold text-saffron">₹{(pandit.price_per_puja || 0).toLocaleString()}</p>
                 <p className="text-xs text-gray-400">Price varies per ceremony</p>
               </div>
 

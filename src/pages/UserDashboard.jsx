@@ -3,6 +3,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { Calendar, MapPin, Clock, CheckCircle, AlertCircle, XCircle, Star } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import PageBanner from '../components/PageBanner';
+import { BookingRowSkeleton } from '../components/LoadingSkeleton';
 
 const statusConfig = {
   confirmed: { color: 'bg-green-100 text-green-700 border-green-200', icon: <CheckCircle size={13} />, label: 'Confirmed' },
@@ -12,9 +13,26 @@ const statusConfig = {
 };
 
 export default function UserDashboard() {
-  const { user, bookings } = useApp();
+  const { user, bookings, bookingsLoaded, fetchBookings } = useApp();
   const [searchParams] = useSearchParams();
   const justBooked = searchParams.get('booked') === 'true';
+
+  useEffect(() => {
+    if (user) fetchBookings();
+  }, [user]);
+
+  // Normalize field names (backend uses snake_case, fallback for local)
+  const normalizeBooking = (b) => ({
+    id:          b.id || b.booking_ref,
+    pujaName:    b.puja_name  || b.pujaName  || '—',
+    panditName:  b.pandit_name || b.panditName || '—',
+    date:        b.date,
+    time:        b.time,
+    location:    b.city || b.location || '—',
+    price:       b.amount || b.price || 0,
+    status:      b.status || 'pending',
+    booking_ref: b.booking_ref || b.id,
+  });
 
   if (!user) {
     return (
@@ -87,7 +105,11 @@ export default function UserDashboard() {
             <Link to="/pujas" className="text-sm text-saffron font-medium hover:underline">+ Book New Puja</Link>
           </div>
 
-          {bookings.length === 0 ? (
+          {!bookingsLoaded ? (
+            <div className="divide-y divide-gray-50">
+              {[1,2,3].map((i) => <BookingRowSkeleton key={i} />)}
+            </div>
+          ) : bookings.length === 0 ? (
             <div className="p-12 text-center">
               <div className="text-5xl mb-3">📋</div>
               <h3 className="font-semibold text-gray-800 mb-1">No bookings yet</h3>
@@ -98,7 +120,8 @@ export default function UserDashboard() {
             </div>
           ) : (
             <div className="divide-y divide-gray-50">
-              {bookings.map((booking) => {
+              {bookings.map((raw) => {
+                const booking = normalizeBooking(raw);
                 const status = statusConfig[booking.status] || statusConfig.pending;
                 return (
                   <div key={booking.id} className="p-5 hover:bg-orange-50/40 transition-colors">
@@ -112,25 +135,16 @@ export default function UserDashboard() {
                         </div>
                         <p className="text-sm text-gray-600 mb-2">👳 {booking.panditName}</p>
                         <div className="flex flex-wrap gap-3 text-xs text-gray-500">
-                          <span className="flex items-center gap-1">
-                            <Calendar size={11} className="text-orange-400" />
-                            {booking.date}
-                          </span>
-                          <span className="flex items-center gap-1">
-                            <Clock size={11} className="text-orange-400" />
-                            {booking.time}
-                          </span>
-                          <span className="flex items-center gap-1">
-                            <MapPin size={11} className="text-orange-400" />
-                            {booking.location}
-                          </span>
+                          <span className="flex items-center gap-1"><Calendar size={11} className="text-orange-400" />{booking.date}</span>
+                          <span className="flex items-center gap-1"><Clock size={11} className="text-orange-400" />{booking.time}</span>
+                          <span className="flex items-center gap-1"><MapPin size={11} className="text-orange-400" />{booking.location}</span>
                         </div>
                       </div>
                       <div className="text-right">
-                        <p className="font-bold text-saffron">₹{booking.price?.toLocaleString()}</p>
-                        <p className="text-xs text-gray-400 mt-0.5">ID: {booking.id}</p>
+                        <p className="font-bold text-saffron">₹{Number(booking.price).toLocaleString()}</p>
+                        <p className="text-xs text-gray-400 mt-0.5 font-mono">{booking.booking_ref}</p>
                         {booking.status === 'completed' && (
-                          <button className="text-xs text-amber-600 hover:underline flex items-center gap-1 mt-2">
+                          <button className="text-xs text-amber-600 hover:underline flex items-center gap-1 mt-2 ml-auto">
                             <Star size={10} /> Rate & Review
                           </button>
                         )}

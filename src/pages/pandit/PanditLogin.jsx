@@ -10,12 +10,18 @@ export default function PanditLogin() {
   const [showPass, setShowPass] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  const [error, setError] = useState('');
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 800));
-    loginPandit({ name: 'Pandit Raghavendra Sharma', email: form.email, id: 1 });
-    navigate('/pandit/dashboard');
+    setError('');
+    try {
+      await loginPandit(form.email, form.password);
+      navigate('/pandit/dashboard');
+    } catch (err) {
+      setError(err.message || 'Invalid email or password.');
+    }
     setLoading(false);
   };
 
@@ -90,6 +96,11 @@ export default function PanditLogin() {
 
           {/* Form card */}
           <div className="bg-white rounded-2xl shadow-sm border p-8" style={{ borderColor: '#D4AF37', borderTopWidth: '3px' }}>
+            {error && (
+              <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-xl text-xs text-red-600 font-medium">
+                {error}
+              </div>
+            )}
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1.5">Email</label>

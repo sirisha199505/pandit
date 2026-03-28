@@ -31,23 +31,23 @@ export default function PujaCard({ puja }) {
       {/* Content */}
       <div className="flex flex-col flex-1 p-4">
         <h3 className="font-semibold text-stone-900 text-sm mb-1 leading-snug">{puja.name}</h3>
-        <p className="text-xs text-stone-500 leading-relaxed line-clamp-2 mb-3">{puja.description}</p>
+        <p className="text-xs text-stone-500 leading-relaxed line-clamp-2 mb-3">{puja.desc || puja.description}</p>
 
         {/* Meta row */}
         <div className="flex items-center justify-between text-[11px] text-stone-400 mb-3">
           <span className="flex items-center gap-1">
             <Clock size={10} className="text-orange-400" />
-            {puja.duration}
+            {puja.duration || '2–4 hrs'}
           </span>
           <span className="flex items-center gap-1">
             <TrendingUp size={10} className="text-emerald-500" />
-            {puja.popularity}% popular
+            {puja.orders ? `${puja.orders}+ booked` : (puja.popularity ? `${puja.popularity}% popular` : 'Popular')}
           </span>
         </div>
 
         {/* Tradition tags */}
         <div className="flex flex-wrap gap-1 mb-4">
-          {puja.traditions.slice(0, 2).map((t) => (
+          {(puja.traditions || [puja.category]).filter(Boolean).slice(0, 2).map((t) => (
             <span key={t} className="text-[10px] font-medium bg-orange-50 text-orange-600 px-2 py-0.5 rounded-full border border-orange-100">
               {t}
             </span>

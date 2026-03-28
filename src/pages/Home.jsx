@@ -1,13 +1,15 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   Search, MapPin, ArrowRight, Shield, Star, Zap,
   Globe, Video, Package, Calendar, ChevronRight,
 } from 'lucide-react';
-import { pandits, pujas, categories, testimonials, stats, muhurats } from '../data/mockData';
+import { categories, testimonials, stats, muhurats } from '../data/constants';
+import { panditsApi, productsApi } from '../services/api';
 import PanditCard from '../components/PanditCard';
 import PujaCard from '../components/PujaCard';
 import StarRating from '../components/StarRating';
+import { PanditCardSkeleton, PujaCardSkeleton } from '../components/LoadingSkeleton';
 
 /* ─── Section header helper ─── */
 function SectionHeader({ label, title, subtitle, center = true }) {
@@ -26,8 +28,21 @@ function SectionHeader({ label, title, subtitle, center = true }) {
 
 export default function Home() {
   const navigate = useNavigate();
-  const [searchQuery, setSearchQuery]     = useState('');
+  const [searchQuery, setSearchQuery]       = useState('');
   const [searchLocation, setSearchLocation] = useState('');
+  const [pandits, setPandits]   = useState([]);
+  const [pujas, setPujas]       = useState([]);
+  const [loading, setLoading]   = useState(true);
+
+  useEffect(() => {
+    Promise.all([
+      panditsApi.list({ page_size: 3 }),
+      productsApi.list(),
+    ]).then(([pr, pu]) => {
+      setPandits(pr.data || []);
+      setPujas(pu.data || []);
+    }).catch(() => {}).finally(() => setLoading(false));
+  }, []);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -277,7 +292,10 @@ export default function Home() {
             </Link>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {pujas.slice(0, 4).map((puja) => <PujaCard key={puja.id} puja={puja} />)}
+            {loading
+              ? [1,2,3,4].map(i => <PujaCardSkeleton key={i} />)
+              : pujas.slice(0, 4).map((puja) => <PujaCard key={puja.id} puja={puja} />)
+            }
           </div>
         </div>
       </section>
@@ -329,7 +347,10 @@ export default function Home() {
             </Link>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {pandits.slice(0, 3).map((p) => <PanditCard key={p.id} pandit={p} />)}
+            {loading
+              ? [1,2,3].map(i => <PanditCardSkeleton key={i} />)
+              : pandits.slice(0, 3).map((p) => <PanditCard key={p.id} pandit={p} />)
+            }
           </div>
         </div>
       </section>
